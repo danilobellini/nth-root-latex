@@ -1,0 +1,246 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{ifthen}
+\usepackage{indentfirst}
+\usepackage[a4paper, margin=2cm, bottom=3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath} % \dfrac
+\usepackage{dsfont} % \mathds
+\usepackage{minted}
+\usepackage{inconsolata}
+\usepackage{tikz}
+\usepackage{float}
+
+\setminted{
+  python3,
+  autogobble,
+  style=bw,
+  fontsize=\fontsize{10pt}{12pt},
+  frame=lines,
+  framesep=2mm,
+  framerule=.7pt,
+}
+
+
+% Redefine \section to write custom consistent titles
+\let \sectionBkp = \section
+\newcommand{\sectionFormatter}[1]{
+    \centering\large\textbf{\textsc{#1}}}
+\renewcommand{\section}[2]
+    {\ifthenelse{\equal{#1}{*}}
+        {\sectionBkp*{\sectionFormatter{#2}}}
+        {\sectionBkp{\sectionFormatter{#2}}}
+    }
+
+% Redefine \part to write a custom leading title
+\let \partBkp = \part
+\newcommand{\partFormatter}[1]{
+    \centering\Large\textbf{\textsc{#1}}}
+\renewcommand{\part}[2]
+    {\ifthenelse{\equal{#1}{*}}
+        {\partBkp*{\partFormatter{#2}}}
+        {\partBkp{\partFormatter{#2}}}
+    }
+
+
+\linespread{1.1}
+\setlength{\parskip}{9pt}
+\usetikzlibrary{arrows}
+\everymath{\displaystyle}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+\cfoot{\pagename~\thepage~/~\pageref{LastPage}}
+
+\renewcommand{\thefootnote}{[\arabic{footnote}]}
+
+\sloppy % Required to properly break URLs
+
+
+\title{Algoritmo para calcular $\lfloor \sqrt[n]{x} \rfloor$
+       numericamente com $x, n \in \mathds{N}^*$}
+\author{Danilo J. S. Bellini}
+
+
+\begin{document}
+
+\makeatletter\part*{\@title}\hfill\@author\makeatother
+
+
+\section*{Resumo}
+
+Na PEP 572, há um algoritmo\footnote{
+  \url{https://www.python.org/dev/peps/pep-0572/\#a-numeric-example}
+} implementado no Python com e sem uma \emph{assignment expression}
+para o cálculo da raiz $n$-ésima de $x$,
+utilizando apenas inteiros (entrada, saída e valores intermediários),
+sendo que o resultado final é o valor truncado da raiz desejada
+no caso deste não ser inteiro.
+Este documento visa explicar e justificar
+o funcionamento desse algoritmo.
+
+
+\section*{Descrição do algoritmo}
+
+Sejam $x$ e $n$ valores inteiros positivos,
+e $a_0 \ge \sqrt[n]{x}$ um palpite inicial, também inteiro e positivo
+(por exemplo, o próprio valor $x$).
+Para encontrar numericamente o valor de $\lfloor \sqrt[n]{x} \rfloor$,
+calcularemos iterativamente a seguinte sequência
+enquanto $a_k > d_{k+1}$:
+\[d_{k+1} = \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor\]
+\[a_{k+1} = \left\lfloor \dfrac{(n-1) a_k + d_{k+1}}{n} \right\rfloor\]
+O resultado é o último valor $a_k$ encontrado nesse processo.
+Isto é, o resultado é o valor de $a_r$,
+em que $r$ é menor índice $k$ para o qual vale $a_k \le d_{k+1}$.
+
+Esse algoritmo pode ser adaptado
+a partir da forma\footnote{
+  O uso dessa sintaxe está disponível a partir do Python 3.8.
+} como consta na PEP 572
+para explicitar um valor inicial padrão e ser escrito como uma função:
+
+\begin{center}
+  \begin{minipage}{7cm}
+    \begin{minted}{python}
+      def nth_root(x, n, a0=None):
+          a = x if a0 is None else a0
+          while a > (d := x // a ** (n - 1)):
+              a = ((n - 1) * a + d) // n
+          return a
+    \end{minted}
+  \end{minipage}
+\end{center}
+
+
+\section*{Uma recorrência similar a partir do método de Newton-Raphson}
+
+Seja $f(\alpha) = \alpha^n - x$
+em que $\alpha \in \mathds{R}$ e $x, n \in \mathds{N}^*$.
+Nota-se que $f(\sqrt[n]{x}) = 0$,
+e nosso objetivo é obter esse zero dessa função.
+A derivada de $f$ com relação a $\alpha$ é:
+\[f'(\alpha) = n \alpha^{n-1}\]
+A qual é estritamente positiva para $\alpha$ positivo,
+o que significa que $f(\alpha)$ é monotônica crescente
+no domínio $\alpha > 0$.
+Isso nos diz que a raiz $n$-ésima de $x$
+é o único zero real positivo dessa função.
+
+A regra de iteração do método de Newton-Raphson
+sobre uma função $f:\mathds{R}\to\mathds{R}$
+consiste no uso da raiz (ou zero)
+da aproximação linear em torno do ``ponto atual'' da função
+como a nova abscissa que será utilizada
+para obter o ``ponto seguinte'' da sequência.
+Esse processo está ilustrado na figura~\ref{fig:newton-raphson}.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+      domain=-.5:15.3,
+      scale=.7,
+      samples=100,
+      axis/.style={very thick, >=stealth', ->},
+      grid/.style={thin, color=gray},
+      func/.style={thick, color=darkgray},
+      approx/.style={thin, color=gray, >=stealth', ->},
+    ]
+
+    \draw[grid, dotted, step=1] (0, 0) grid (16, 8);
+    \draw[axis] (0, -.5) -- (0, 8.5) node[above] {$f(\alpha)$};
+    \draw[axis] (-.5, 0) -- (16.5, 0) node[right] {$\alpha$};
+    \draw[func] plot function{(x / 10) ** 5 - .2};
+
+    \draw[grid, dashed]
+      (15, 7.39375)
+        -- (15, 0)
+        node[below, color=black] {$\alpha_0$}
+      (12.079012345679013, 2.3713259083991125)
+        -- (12.079012345679013, 0)
+        node[below, color=black] {$\alpha_1$}
+      (9.851113126088102, 0.7277405339275622)
+        -- (9.851113126088102, 0)
+        node[below, color=black] {$\alpha_2$}
+      (8.305626200813814, 0.1952409256907805)
+        -- (8.305626200813814, 0)
+        node[below, color=black] {$\alpha_3$}
+      (7.485064339688552, 0.034951211574533014)
+        -- (7.485064339688552, 0)
+        node[below, color=black] {$\alpha_4$};
+
+    \draw[approx, solid]
+      (15, 7.39375)
+        -- (12.079012345679013, 0);
+    \draw[approx, solid]
+      (12.079012345679013, 2.3713259083991125)
+        -- (9.851113126088102, 0);
+    \draw[approx, solid]
+      (9.851113126088102, 0.7277405339275622)
+        -- (8.305626200813814, 0);
+    \draw[approx, solid]
+      (8.305626200813814, 0.1952409256907805)
+        -- (7.485064339688552, 0);
+
+    \foreach \x/\xtext in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                           11, 12, 13, 14, 15, 16}
+      \draw[shift={(\x, 0)}] (0pt, 2pt) -- (0pt, -2pt) node[below] {};
+    \foreach \y in {1, 2, 3, 4, 5, 6, 7, 8}
+      \draw[shift={(0, \y)}] (2pt, 0pt) -- (-2pt, 0pt) node[left] {};
+
+  \end{tikzpicture}
+  \caption{Ilustração do método de Newton-Raphson}
+  \label{fig:newton-raphson}
+\end{figure}
+
+A aproximação linear\footnote{
+  Essa equação é dada na forma $g - g_0 = m (\alpha - \alpha_0)$,
+  ou, equivalentemente,
+  $g(\alpha) - g(\alpha_0) = m (\alpha - \alpha_0)$,
+  em que o coeficiente angular $m$ é a derivada da função $g(\alpha)$.
+} em torno da abscissa $\alpha_k$
+é a reta tangente à função $f(\alpha)$ nesse ponto,
+e é dada por
+$g(\alpha_{k+1}) - g(\alpha_k) =
+ f'(\alpha_k) \left( \alpha_{k+1} - \alpha_k \right)$,
+em que:
+\begin{itemize}
+  \item
+  $g(\alpha_k) = f(\alpha_k)$, pois a aproximação linear
+  passa pelo mesmo ponto $(\alpha_k, f(\alpha_k))$ da função; e
+  \item
+  $g(\alpha_{k+1}) = 0$,
+  pois queremos o zero da aproximação linear.
+\end{itemize}
+
+Isso permite obter a recorrência
+que define a sequência do método de Newton-Raphson:
+\[\alpha_{k+1} = \alpha_k - \dfrac{f(\alpha_k)}{f'(\alpha_k)}\]
+Aplicando os valores de $f(\alpha)$ e $f'(\alpha)$:
+\[
+  \begin{array}{rcl}
+  \alpha_{k+1}
+  &=& \alpha_k - \dfrac{\alpha_k^n - x}{n \alpha_k^{n-1}} \\[5mm]
+  &=& \dfrac{\alpha_k n \alpha_k^{n-1}
+    - (\alpha_k^n - x)}{n \alpha_k^{n-1}} \\[5mm]
+  &=& \dfrac{n \alpha_k^n - \alpha_k^n + x}{n \alpha_k^{n-1}} \\[5mm]
+  &=& \dfrac{(n-1) \alpha_k^n + x}{n \alpha_k^{n-1}} \\[5mm]
+  &=& \dfrac{(n-1) \alpha_k + \dfrac{x}{\alpha_k^{n-1}}}{n}
+  \end{array}
+\]
+Escrevendo de outra forma:
+\[\delta_{k+1} = \dfrac{x}{\alpha_k^{n-1}}\]
+\[\alpha_{k+1} = \dfrac{(n-1) \alpha_k + \delta_{k+1}}{n}\]
+O que é bastante similar ao algoritmo proposto inicialmente,
+a menos da ausência da função chão (ou piso)
+que tornava os resultados intermediários naturais/inteiros,
+e da ausência, até o momento, de um critério de parada.
+
+
+\end{document}
