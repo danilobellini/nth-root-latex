@@ -55,6 +55,16 @@
 \usetikzlibrary{arrows}
 \everymath{\displaystyle}
 
+% Based on a message from this discussion:
+% https://groups.google.com/d/msg/fr.comp.text.tex/_aU09zAL3a0/xm4ib_g1LgQJ
+\makeatletter
+\newcommand*{\bracketize}[4][0pt]{\mathpalette{\@bracketize#2#3}{{#1}{#4}}}
+\newcommand*{\@bracketize}[4]{%
+\mbox{\raisebox{\@firstoftwo#4}{$#3\left#1\raisebox{-\@firstoftwo#4}%
+{$#3{\@secondoftwo#4}$}\right#2$}}}
+\makeatother
+
+
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
 \renewcommand{\footrulewidth}{1pt}
