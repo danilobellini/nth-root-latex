@@ -1,0 +1,52 @@
+\begin{tikzpicture}[
+    domain=-.5:15.3,
+    scale=.7,
+    samples=100,
+    axis/.style={very thick, >=stealth', ->},
+    grid/.style={thin, color=gray},
+    func/.style={thick, color=darkgray},
+    approx/.style={thin, color=gray, >=stealth', ->},
+  ]
+
+  \draw[grid, dotted, step=1] (0, 0) grid (16, 8);
+  \draw[axis] (0, -.5) -- (0, 8.5) node[above] {$f(\alpha)$};
+  \draw[axis] (-.5, 0) -- (16.5, 0) node[right] {$\alpha$};
+  \draw[func] plot function{(x / 10) ** 5 - .2};
+
+  \draw[grid, dashed]
+    (15, 7.39375)
+      -- (15, 0)
+      node[below, color=black] {$\alpha_0$}
+    (12.079012345679013, 2.3713259083991125)
+      -- (12.079012345679013, 0)
+      node[below, color=black] {$\alpha_1$}
+    (9.851113126088102, 0.7277405339275622)
+      -- (9.851113126088102, 0)
+      node[below, color=black] {$\alpha_2$}
+    (8.305626200813814, 0.1952409256907805)
+      -- (8.305626200813814, 0)
+      node[below, color=black] {$\alpha_3$}
+    (7.485064339688552, 0.034951211574533014)
+      -- (7.485064339688552, 0)
+      node[below, color=black] {$\alpha_4$};
+
+  \draw[approx, solid]
+    (15, 7.39375)
+      -- (12.079012345679013, 0);
+  \draw[approx, solid]
+    (12.079012345679013, 2.3713259083991125)
+      -- (9.851113126088102, 0);
+  \draw[approx, solid]
+    (9.851113126088102, 0.7277405339275622)
+      -- (8.305626200813814, 0);
+  \draw[approx, solid]
+    (8.305626200813814, 0.1952409256907805)
+      -- (7.485064339688552, 0);
+
+  \foreach \x/\xtext in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                         11, 12, 13, 14, 15, 16}
+    \draw[shift={(\x, 0)}] (0pt, 2pt) -- (0pt, -2pt) node[below] {};
+  \foreach \y in {1, 2, 3, 4, 5, 6, 7, 8}
+    \draw[shift={(0, \y)}] (2pt, 0pt) -- (-2pt, 0pt) node[left] {};
+
+\end{tikzpicture}
