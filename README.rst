@@ -25,7 +25,6 @@ esse algoritmo dobra o número de bits acurados a cada iteração.
 
 Para compilar (gerar o PDF) é necessário ter instalados,
 além de uma distribuição do LaTeX,
-o `gnuplot <http://www.gnuplot.info/>`_ e
 o `pygments <https://pygments.org/>`_\ .
 O comando para gerar o PDF é:
 
@@ -37,9 +36,6 @@ O comando para gerar o PDF é:
 
 .. _`PEP 572`:
   https://www.python.org/dev/peps/pep-0572#a-numeric-example
-
-.. _`gnuplot`:
-  http://www.gnuplot.info
 
 .. _`pygments`:
   https://pygments.org
