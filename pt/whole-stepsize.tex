@@ -1,0 +1,34 @@
+\subsection*{Tamanho do passo}
+
+Podemos reorganizar o valor de $a_{k+1}$ da seguinte forma:
+\[
+  a_{k+1}
+  = \bracketize[.75em]{\lfloor}{\rfloor}{
+      \dfrac{(n-1) a_k + \dfrac{x}{a_k^{n-1}}}{n}
+    }
+  = \bracketize[.75em]{\lfloor}{\rfloor}{
+      \dfrac{n a_k - a_k + \dfrac{x}{a_k^{n-1}}}{n}
+    }
+  = \bracketize[.75em]{\lfloor}{\rfloor}{
+      a_k +
+      \dfrac{- \dfrac{a_k^n}{a_k^{n-1}} + \dfrac{x}{a_k^{n-1}}}
+            {n}
+    }
+  = \left\lfloor
+      a_k +
+      \dfrac{x - a_k^n}{na_k^{n-1}}
+    \right\rfloor
+\]
+Como $a_k \in \mathds{N}$, podemos retirar da função chão:
+\[
+  a_{k+1}
+  = a_k +
+    \left\lfloor
+      \dfrac{x - a_k^n}{na_k^{n-1}}
+    \right\rfloor
+\]
+De forma que o passo de atualização $p_{k+1} = a_{k+1} - a_{k}$
+é dado por:
+\[
+  p_{k+1} = \left\lfloor \dfrac{x - a_k^n}{na_k^{n-1}} \right\rfloor
+\]
