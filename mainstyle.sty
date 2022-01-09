@@ -1,0 +1,82 @@
+\ProvidesPackage{mainstyle}
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{ifthen}
+\RequirePackage{indentfirst}
+\RequirePackage[a4paper, margin=2cm, bottom=3cm]{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\RequirePackage[hidelinks, pdfusetitle, hyperfootnotes=false]{hyperref}
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{dsfont}
+\RequirePackage{cancel}
+
+\RequirePackage{minted}
+\RequirePackage{inconsolata}
+
+\RequirePackage{tikz}
+\usetikzlibrary{arrows}
+
+% Source code printing (require pygments, through --shell-escape)
+\setminted{
+  python3,
+  autogobble,
+  style=bw,
+  fontsize=\fontsize{10pt}{12pt},
+  frame=lines,
+  framesep=2mm,
+  framerule=.7pt,
+}
+
+% Redefine \section to write custom consistent titles
+\let \sectionBkp = \section
+\newcommand{\sectionFormatter}[1]{\centering\large\textbf{\textsc{#1}}}
+\renewcommand{\section}[2]{%
+  \ifthenelse{\equal{#1}{*}}
+    {\sectionBkp*{\sectionFormatter{#2}}}
+    {\sectionBkp{\sectionFormatter{#2}}}%
+}
+
+% Redefine \part to write a custom leading title
+\let \partBkp = \part
+\newcommand{\partFormatter}[1]{\centering\Large\textbf{\textsc{#1}}}
+\renewcommand{\part}[2]{%
+  \ifthenelse{\equal{#1}{*}}
+    {\partBkp*{\partFormatter{#2}}}
+    {\partBkp{\partFormatter{#2}}}%
+}
+
+% Set the text spacing
+\linespread{1.1}
+\setlength{\parskip}{9pt}
+\sloppy  % Required to properly break URLs
+
+% Set top/bottom rules and the footer
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+\cfoot{\pagename~\thepage~/~\pageref{LastPage}}
+
+% Footnote stuff
+\renewcommand{\thefootnote}{[\arabic{footnote}]}
+
+% Leading title with \maketitle
+\renewcommand{\maketitle}{\part*{\@title}\hfill\@author}
+
+% Custom left/right bracket resizing command for unbalanced fractions,
+% based on a message from this discussion:
+% groups.google.com/d/msg/fr.comp.text.tex/_aU09zAL3a0/xm4ib_g1LgQJ
+\newcommand*{\bracketize}[4][0pt]{%
+  \mathpalette{\@bracketize#2#3}{{#1}{#4}}%
+}
+\newcommand*{\@bracketize}[4]{%
+  \mbox{%
+    \raisebox{\@firstoftwo#4}{%
+      $#3\left#1\raisebox{-\@firstoftwo#4}%
+      {$#3{\@secondoftwo#4}$}\right#2$%
+    }%
+  }%
+}

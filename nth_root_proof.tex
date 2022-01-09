@@ -1,78 +1,7 @@
 \documentclass{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}
-\usepackage{ifthen}
-\usepackage{indentfirst}
-\usepackage[a4paper, margin=2cm, bottom=3cm]{geometry}
-\usepackage{fancyhdr}
-\usepackage{lastpage}
-\usepackage[hidelinks]{hyperref}
-\usepackage{amsmath} % \dfrac
-\usepackage{amssymb} % \blacksquare
-\usepackage{dsfont} % \mathds
-\usepackage{minted}
-\usepackage{inconsolata}
-\usepackage{tikz}
-\usepackage{float}
-\usepackage{cancel}
-
-\setminted{
-  python3,
-  autogobble,
-  style=bw,
-  fontsize=\fontsize{10pt}{12pt},
-  frame=lines,
-  framesep=2mm,
-  framerule=.7pt,
-}
-
-
-% Redefine \section to write custom consistent titles
-\let \sectionBkp = \section
-\newcommand{\sectionFormatter}[1]{
-    \centering\large\textbf{\textsc{#1}}}
-\renewcommand{\section}[2]
-    {\ifthenelse{\equal{#1}{*}}
-        {\sectionBkp*{\sectionFormatter{#2}}}
-        {\sectionBkp{\sectionFormatter{#2}}}
-    }
-
-% Redefine \part to write a custom leading title
-\let \partBkp = \part
-\newcommand{\partFormatter}[1]{
-    \centering\Large\textbf{\textsc{#1}}}
-\renewcommand{\part}[2]
-    {\ifthenelse{\equal{#1}{*}}
-        {\partBkp*{\partFormatter{#2}}}
-        {\partBkp{\partFormatter{#2}}}
-    }
-
-
-\linespread{1.1}
-\setlength{\parskip}{9pt}
-\usetikzlibrary{arrows}
-\everymath{\displaystyle}
-
-% Based on a message from this discussion:
-% https://groups.google.com/d/msg/fr.comp.text.tex/_aU09zAL3a0/xm4ib_g1LgQJ
-\makeatletter
-\newcommand*{\bracketize}[4][0pt]{\mathpalette{\@bracketize#2#3}{{#1}{#4}}}
-\newcommand*{\@bracketize}[4]{%
-\mbox{\raisebox{\@firstoftwo#4}{$#3\left#1\raisebox{-\@firstoftwo#4}%
-{$#3{\@secondoftwo#4}$}\right#2$}}}
-\makeatother
-
-
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{1pt}
-\renewcommand{\footrulewidth}{1pt}
-\cfoot{\pagename~\thepage~/~\pageref{LastPage}}
-
-\renewcommand{\thefootnote}{[\arabic{footnote}]}
-
-\sloppy % Required to properly break URLs
+\usepackage{mainstyle}
 
 
 \title{Algoritmo para calcular $\lfloor \sqrt[n]{x} \rfloor$
@@ -82,8 +11,7 @@
 
 \begin{document}
 
-\makeatletter\part*{\@title}\hfill\@author\makeatother
-
+\maketitle
 
 \section*{Resumo}
 
