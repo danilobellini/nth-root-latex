@@ -23,9 +23,8 @@ e o valor inicial de "a" é maior ou igual à raiz n-ésima de x.
 A `PEP 572`_ ainda diz que, a grosso modo,
 esse algoritmo dobra o número de bits acurados a cada iteração.
 
-Para compilar (gerar o PDF) é necessário ter instalados,
-além de uma distribuição do LaTeX,
-o `pygments <https://pygments.org/>`_\ .
+Para compilar (gerar o PDF) é necessário ter instalado o pygments_\ ,
+além de uma distribuição do LaTeX.
 O comando para gerar o PDF é:
 
 .. code-block:: shell
