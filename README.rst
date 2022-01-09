@@ -1,5 +1,56 @@
+Integer-only n-th root of x / Raiz n-ésima de x apenas com inteiros
+===================================================================
+
+.. list-table::
+
+  * - `English`_
+    - `Português`_
+
+
+.. _English:
+
+Integer-only n-th root of x
+---------------------------
+
+In `PEP 572`_\ , there's an algorithm
+implemented in Python with and without an *assignment expression*
+for obtaining the n-th root of x,
+using only integer numbers (input, output and in-between values),
+where the final result is the truncated value of the desired root
+if it's not an integer.
+This document aims to explain and justify
+how this algorithm works.
+
+The code found in `PEP 572`_ is:
+
+.. code-block:: python
+
+  while a > (d := x // a**(n-1)):
+      a = ((n-1)*a + d) // n
+  return a
+
+
+Where all variables have positive integer values,
+and the initial value of "a" is greater than or equal to
+the n-th root of x.
+`PEP 572`_ further says that, roughly speaking,
+this algorithm doubles the number of accurate bits at each iteration.
+
+In order to compile (generate the PDF),
+it's required to have pygments_ previously installed,
+apart from a LaTeX distribution.
+The command for creating the PDF is:
+
+.. code-block:: shell
+
+  pdflatex --shell-escape nth_root_proof.tex && \
+  pdflatex --shell-escape nth_root_proof.tex
+
+
+.. _Português:
+
 Raiz n-ésima de x apenas com inteiros
-=====================================
+-------------------------------------
 
 Na `PEP 572`_\ , há um algoritmo
 implementado no Python com e sem uma *assignment expression*
