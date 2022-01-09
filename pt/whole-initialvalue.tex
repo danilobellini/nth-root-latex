@@ -1,0 +1,35 @@
+\subsection*{Limitante inferior e valor inicial da sequência}
+
+A desigualdade das médias aritmética e geométrica
+pode ser aplicada à média de $n - 1$ ocorrências de $a_k$
+e uma ocorrência de $x/a_k^{n-1}$:
+\[
+  \dfrac{(n-1) a_k + \dfrac{x}{a_k^{n-1}}}{n} \ge
+  \sqrt[n]{a_k^{n-1} \dfrac{x}{a_k^{n-1}}}
+\]
+Aplicando a função chão de cada lado da inequação, temos, de imediato:
+\[
+  a_{k+1} \ge \lfloor \sqrt[n]{x} \rfloor
+\]
+De forma que, basta termos $a_0 > 0$
+para garantirmos $a_k \ge \lfloor \sqrt[n]{x} \rfloor$ para $k > 0$.
+Mas seria interessante adotar uma condição inicial
+que também mantivesse essa propriedade.
+Para isso, suponha que $a_s = 1$, com isso teríamos:
+\[
+  a_{s+1}
+  = \left\lfloor \dfrac{n - 1 + x}{n} \right\rfloor
+  = \left\lfloor \dfrac{x - 1}{n} + 1 \right\rfloor
+  = \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+\]
+Isso significa que:
+\[
+  \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+  \ge \lfloor \sqrt[n]{x} \rfloor
+\]
+Ou seja, caso adotemos como condição inicial:
+\[
+  a_0 = \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+\]
+Garantimos $a_k \ge \lfloor \sqrt[n]{x} \rfloor$
+para todo $k \in \mathds{N}$.
