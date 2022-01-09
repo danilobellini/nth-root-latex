@@ -1,0 +1,31 @@
+\subsection*{Função chão interna}
+
+Devido às propriedades da função chão,
+podemos reescrever $a_{k+1}$ como:
+\[
+  a_{k+1}
+  = \bracketize[.75em]{\lfloor}{\rfloor}{
+      \dfrac{\left\lfloor
+               (n-1) a_k + \dfrac{x}{a_k^{n-1}}
+             \right\rfloor}
+            {n}
+    } \\
+  = \bracketize[.75em]{\lfloor}{\rfloor}{
+      \dfrac{(n-1) a_k +
+             \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor}
+            {n}
+    } \\
+\]
+Pois o denominador $n$ é um inteiro positivo,
+e a parcela $(n - 1) a_k$ é inteira.
+Essa nova formulação corresponde precisamente
+ao algoritmo inicialmente proposto:
+\[
+  a_{k+1} = \left\lfloor \dfrac{(n-1) a_k + d_{k+1}}{n} \right\rfloor,
+  \quad\text{onde}\quad
+  d_{k+1} = \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor \\
+\]
+
+Isso significa que a aplicação da função chão interna
+na definição da recorrência $a_k$ não altera em nada o falor de $a_k$,
+desde que a função chão externa seja mantida.
