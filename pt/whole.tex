@@ -1,0 +1,15 @@
+\section*{Convergência em $\mathds{N}^*$
+          a partir da aplicação da função chão}
+
+Vamos realizar uma única mudança
+no procedimento anteriormente obtido pelo método de Newton-Raphson:
+aplicar a função chão após cada passo do algoritmo.
+Iniciando com um palpite inteiro $a_0$,
+temos uma sequência de palpites
+definidos através da recorrência:
+\[
+  a_{k+1}
+  = \bracketize[.75em]{\lfloor}{\rfloor}{
+      \dfrac{(n-1) a_k + \dfrac{x}{a_k^{n-1}}}{n}
+    }
+\]
