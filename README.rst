@@ -43,8 +43,8 @@ The command for creating the PDF is:
 
 .. code-block:: shell
 
-  pdflatex --shell-escape nth_root_proof.tex && \
-  pdflatex --shell-escape nth_root_proof.tex
+  PDFLANG=en pdflatex --shell-escape nth_root_proof.tex && \
+  PDFLANG=en pdflatex --shell-escape nth_root_proof.tex
 
 
 .. _Português:
@@ -80,8 +80,8 @@ O comando para gerar o PDF é:
 
 .. code-block:: shell
 
-  pdflatex --shell-escape nth_root_proof.tex && \
-  pdflatex --shell-escape nth_root_proof.tex
+  PDFLANG=pt pdflatex --shell-escape nth_root_proof.tex && \
+  PDFLANG=pt pdflatex --shell-escape nth_root_proof.tex
 
 
 .. _`PEP 572`:

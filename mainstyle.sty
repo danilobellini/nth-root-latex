@@ -8,6 +8,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{lastpage}
 \RequirePackage[hidelinks, pdfusetitle, hyperfootnotes=false]{hyperref}
+\RequirePackage{expl3}
 
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
@@ -19,6 +20,12 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{arrows}
+
+% Store the PDFLANG environment variable in \getpdflang
+\ExplSyntaxOn
+\sys_get_shell:nnN { kpsewhich ~ --var-value ~ PDFLANG } {} \getpdflang
+\tl_trim_spaces:N \getpdflang
+\ExplSyntaxOff
 
 % Source code printing (require pygments, through --shell-escape)
 \setminted{
