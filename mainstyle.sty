@@ -25,7 +25,15 @@
 \ExplSyntaxOn
 \sys_get_shell:nnN { kpsewhich ~ --var-value ~ PDFLANG } {} \getpdflang
 \tl_trim_spaces:N \getpdflang
+
+% Require Babel mapping the PDFLANG to Babel's ldf
+\prop_const_from_keyval:Nn \g_pdflang_to_babel_prop {
+  en = american ,
+  pt = brazil ,
+}
+\prop_get:NoN \g_pdflang_to_babel_prop \getpdflang \getbabellang
 \ExplSyntaxOff
+\RequirePackage[\getbabellang]{babel}
 
 % Source code printing (require pygments, through --shell-escape)
 \setminted{
