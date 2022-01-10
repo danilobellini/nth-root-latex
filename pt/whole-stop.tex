@@ -1,0 +1,99 @@
+\subsection*{Sinal do passo e condição de parada}
+
+Suponha $a_k = \sqrt[n]{x}$.
+Como $a_k \in \mathds{N}$,
+também sabemos que $\sqrt[n]{x} = \lfloor \sqrt[n]{x} \rfloor$.
+Elevando a $n$ cada lado da igualdade, obtemos $a_k^n = x$,
+o que significa que $p_{k+1} = 0$,
+ou seja, a continuação da sequência será constante,
+igual a $\sqrt[n]{x}$.
+O resultado $a_k$ já é o valor da raiz desejada,
+não sendo necessário continuar o processo iterativo.
+
+Suponha $a_k > \sqrt[n]{x}$.
+Nesse caso, $a_k^n > x$, e portanto $x - a_k^n < 0$,
+i.e., o numerador de $p_{k+1}$ é negativo.
+Logo $p_{k+1} \le -1$, pois seu denominador é positivo
+e o resultado da função chão aplicada a qualquer número negativo
+é sempre um número inteiro negativo.
+
+Suponha $\lfloor \sqrt[n]{x} \rfloor \le a_k < \sqrt[n]{x}$.
+Obviamente, isso somente poderá ocorrer
+se $\lfloor \sqrt[n]{x} \rfloor \ne \sqrt[n]{x}$.
+Pela definição da função chão, temos
+$\lfloor\sqrt[n]{x}\rfloor \le a_k < \lfloor\sqrt[n]{x}\rfloor + 1$,
+o que nos obriga a dizer que $a_k = \lfloor\sqrt[n]{x}\rfloor$
+pelo fato de $a_k$ ser sempre um número inteiro.
+Nesse contexto, temos:
+\[
+  \underbrace{\lfloor \sqrt[n]{x} \rfloor}_{a_k} < \sqrt[n]{x}
+  \quad\implies\quad
+  a_k^n < x
+  \quad\implies\quad
+  x - a_k^n > 0
+  \quad\implies\quad
+  \dfrac{x - a_k^n}{na_k^{n-1}} > 0
+  \quad\implies\quad
+  \underbrace{
+    \left\lfloor \dfrac{x - a_k^n}{na_k^{n-1}} \right\rfloor
+  }_{p_{k+1}} \ge 0
+\]
+
+Resumidamente, o que está escrito acima pode ser escrito como:
+\[
+\begin{cases}
+  a_k > \sqrt[n]{x} &\implies\;\; p_{k+1} < 0 \\
+  a_k \le \sqrt[n]{x} &\implies\;\; p_{k+1} \ge 0
+\end{cases}
+\]
+
+Como $a_k \le \sqrt[n]{x}$ na realidade significa
+$a_k = \lfloor \sqrt[n]{x} \rfloor$,
+podemos considerar que o critério de parada é $p_{k+1} \ge 0$.
+Em outras palavras,
+\emph{o processo iterativo deve continuar
+      apenas enquanto $a_k$ estiver diminuindo},
+e quando parar de diminuir,
+\emph{o valor mínimo encontrado é o próprio resultado desejado}.
+Como estamos lidando apenas com valores inteiros,
+isso também significa que o resultado é obtido
+após um número finito de iterações.
+
+Há ainda outra forma de consultar essa condição de parada,
+utilizando propriedades da função chão:
+\[
+  \left\lfloor \dfrac{x - a_k^n}{na_k^{n-1}} \right\rfloor < 0
+  \;\iff\;
+  \dfrac{x - a_k^n}{na_k^{n-1}} < 0
+  \;\stackrel{a_k > 0}{\iff\rule{0pt}{.7em}}\;
+  x - a_k^n < 0
+  \;\iff\;
+  a_k^n > x
+  \;\stackrel{a_k > 0}{\iff\rule{0pt}{.7em}}\;
+  a_k > \dfrac{x}{a_k^{n-1}}
+  \;\stackrel{a_k \in \mathds{N}}{\iff\rule{0pt}{.7em}}\;
+  a_k > \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor
+\]
+\[
+  \left\lfloor \dfrac{x - a_k^n}{na_k^{n-1}} \right\rfloor \ge 0
+  \;\iff\;
+  \dfrac{x - a_k^n}{na_k^{n-1}} \ge 0
+  \;\stackrel{a_k > 0}{\iff\rule{0pt}{.7em}}\;
+  x - a_k^n \ge 0
+  \;\iff\;
+  a_k^n \le x
+  \;\stackrel{a_k > 0}{\iff\rule{0pt}{.7em}}\;
+  a_k \le \dfrac{x}{a_k^{n-1}}
+  \;\stackrel{a_k \in \mathds{N}}{\iff\rule{0pt}{.7em}}\;
+  a_k \le \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor
+\]
+
+Como $d_{k+1} = \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor$,
+a condição de parada é $a_k \le d_{k+1}$:
+\[
+\begin{cases}
+  a_k > \sqrt[n]{x} &\implies\;\; a_k > d_{k+1} \\
+  a_k \le \sqrt[n]{x} &\implies\;\; a_k \le d_{k+1}
+\end{cases}
+\]
+O que corresponde à descrição do algoritmo.
