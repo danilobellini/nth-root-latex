@@ -41,10 +41,15 @@ it's required to have pygments_ previously installed,
 apart from a LaTeX distribution.
 The command for creating the PDF is:
 
-.. code-block:: shell
+.. code-block:: bash
 
-  PDFLANG=en pdflatex --shell-escape nth_root_proof.tex && \
-  PDFLANG=en pdflatex --shell-escape nth_root_proof.tex
+  make en
+  # Or:
+  make nth_root_proof_en.pdf
+  # Or something more manual, like:
+  PDFLANG=en pdflatex -shell-escape nth_root_proof.tex && \
+  PDFLANG=en pdflatex -shell-escape nth_root_proof.tex
+  # Or any of the above with other language instead of "en".
 
 
 .. _Português:
@@ -78,10 +83,15 @@ Para compilar (gerar o PDF) é necessário ter instalado o pygments_\ ,
 além de uma distribuição do LaTeX.
 O comando para gerar o PDF é:
 
-.. code-block:: shell
+.. code-block:: bash
 
-  PDFLANG=pt pdflatex --shell-escape nth_root_proof.tex && \
-  PDFLANG=pt pdflatex --shell-escape nth_root_proof.tex
+  make pt
+  # Ou:
+  make nth_root_proof_pt.pdf
+  # Ou algo mais manual, como:
+  PDFLANG=pt pdflatex -shell-escape nth_root_proof.tex && \
+  PDFLANG=pt pdflatex -shell-escape nth_root_proof.tex
+  # Ou qualquer um dos acima com outro idioma ao invés de "pt".
 
 
 .. _`PEP 572`:
