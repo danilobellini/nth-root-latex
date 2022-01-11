@@ -95,3 +95,8 @@
     }%
   }%
 }
+
+% Custom \stackrel alternative better suited for \iff and \implies
+\newcommand{\stackfirst}[2]{%
+  \stackrel{#1}{\rule{0pt}{.7em}#2\rule{0pt}{.7em}}%
+}
