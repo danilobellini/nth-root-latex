@@ -1,0 +1,25 @@
+\subsection*{Descrição do algoritmo}
+
+Sejam $x$ e $n$ valores inteiros positivos,
+e $a_0 \ge \lfloor \sqrt[n]{x} \rfloor$ um palpite inicial\footnote{
+  Na PEP 572,
+  a restrição para o palpite inicial é $a_0 \ge \sqrt[n]{x}$.
+  A diferença é sutil, mas não é difícil notar
+  que o único número inteiro que satisfaz apenas uma das desigualdades
+  é o próprio resultado desejado para o algoritmo,
+  situação na qual se espera que o processo iterativo encerre
+  e o próprio valor do palpite inicial $a_0$ seja devolvido.
+},
+também inteiro e positivo.
+Para encontrar o valor de $\lfloor \sqrt[n]{x} \rfloor$,
+calcularemos iterativamente a seguinte sequência
+enquanto $a_k > d_{k+1}$:
+\[
+  d_{k+1} = \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor
+\]
+\[
+  a_{k+1} = \left\lfloor \dfrac{(n-1) a_k + d_{k+1}}{n} \right\rfloor
+\]
+O resultado é o último valor $a_k$ encontrado nesse processo,
+isto é, o resultado é o valor de $a_r$,
+em que $r$ é o menor índice $k$ para o qual vale $a_k \le d_{k+1}$.

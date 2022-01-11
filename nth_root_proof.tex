@@ -11,33 +11,7 @@
 \maketitle
 
 \input{\getpdflang/abstract.tex}
-
-
-\section*{Descrição do algoritmo}
-
-Sejam $x$ e $n$ valores inteiros positivos,
-e $a_0 \ge \sqrt[n]{x}$ um palpite inicial, também inteiro e positivo
-(por exemplo, o próprio valor $x$).
-Para encontrar numericamente o valor de $\lfloor \sqrt[n]{x} \rfloor$,
-calcularemos iterativamente a seguinte sequência
-enquanto $a_k > d_{k+1}$:
-\[d_{k+1} = \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor\]
-\[a_{k+1} = \left\lfloor \dfrac{(n-1) a_k + d_{k+1}}{n} \right\rfloor\]
-O resultado é o último valor $a_k$ encontrado nesse processo.
-Isto é, o resultado é o valor de $a_r$,
-em que $r$ é menor índice $k$ para o qual vale $a_k \le d_{k+1}$.
-
-Esse algoritmo pode ser adaptado
-a partir da forma\footnote{
-  O uso dessa sintaxe está disponível a partir do Python 3.8.
-} como consta na PEP 572
-para explicitar um valor inicial padrão e ser escrito como uma função:
-
-\begin{center}
-  \begin{minipage}{7cm}
-    \inputminted{python}{nth_root.py}
-  \end{minipage}
-\end{center}
+\input{pt/intro.tex}
 
 
 \section*{Uma recorrência similar a partir do método de Newton-Raphson}
