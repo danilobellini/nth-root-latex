@@ -1,0 +1,55 @@
+\subsection*{A escolha do valor inicial}
+
+O valor inicial $a_0$ poderia ter sido o próprio $x$,
+visto que $x \ge \lfloor \sqrt[n]{x} \rfloor$
+para todo $x$ inteiro positivo,
+isto é, tal valor satisfaz a restrição definida pelo algoritmo.
+Porém, o valor adotado é tipicamente menor que $x$:
+\[
+  a_0 = \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+\]
+Não é difícil notar que para valores grandes de $x$,
+esse valor inicial será próximo de $x/n$.
+
+O resultado da aplicação da função chão
+nunca é maior que o valor sobre o qual ela é aplicada,
+o que nos permite escrever:
+\[
+  \overbrace{\left\lfloor \dfrac{x - 1}{n} \right\rfloor}^{a_0 - 1}
+  \le \dfrac{x - 1}{n}
+  \quad\iff\quad
+  a_0 \le \dfrac{x - 1}{n} + 1
+\]
+
+Quando essa escolha de $a_0$
+é pior que a adoção do próprio $x$ como valor inicial?
+Isto é, quais são os valores de $x$ e $n$
+que fazem com que $a_0 > x$?
+Para responder a tais perguntas,
+adotemos $a_0 > x$ como hipótese,
+de forma que $x < a_0 \le \dfrac{x - 1}{n} + 1$.
+Logo:
+\[
+  x < \dfrac{x - 1}{n} + 1
+  \quad\iff\quad
+  x - 1 < \dfrac{x - 1}{n}
+  \quad\stackfirst{n > 0}{\iff}\quad
+  n(x - 1) < x - 1
+  \quad\iff\quad
+  (n - 1)(x - 1) < 0
+\]
+Como $x$ e $n$ são inteiros positivos,
+tal inequação é uma contradição,
+o que nos permite dizer que $a_0 \le x$.
+Mais genericamente,
+podemos agrupar as inequações de números inteiros:
+\[
+  \lfloor \sqrt[n]{x} \rfloor
+  \le
+  \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+  \le
+  x
+\]
+A primeira parte da inequação, com a raiz $n$-ésima,
+ainda precisa ser demonstrada,
+mas a segunda parte já está justificada quando $n \ge 1$ e $x \ge 1$.
