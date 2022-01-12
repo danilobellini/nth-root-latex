@@ -1,0 +1,127 @@
+\subsection*{Função chão}
+
+Sejam $\gamma \in \mathds{R}$ e $k \in \mathds{Z}$.
+Uma forma de definir a função chão
+é como a função $\lfloor \cdot \rfloor : \mathds{R} \to \mathds{Z}$
+que satisfaz:
+\begin{equation}\tag{Chão}
+  \lfloor \gamma \rfloor \le \gamma < \lfloor \gamma \rfloor + 1
+\end{equation}
+Isto é,
+$\lfloor \gamma \rfloor$ é o maior inteiro menor ou igual a $\gamma$.
+
+Somando $k$ nas inequações da definição,
+o resultado também satisfaz à definição da função chão:
+\[
+  \overbrace{
+    \underbrace{\lfloor \gamma \rfloor + k}_{\in \mathds{Z}}
+  }^{\lfloor \mu \rfloor}
+  \le \overbrace{\gamma + k}^{\mu} <
+  \overbrace{
+    \underbrace{\lfloor \gamma \rfloor + k}_{\in \mathds{Z}} + 1
+  }^{\lfloor \mu \rfloor + 1}
+\]
+Ou seja:
+\begin{equation}\label{floor-int}
+  \lfloor \gamma \rfloor + k = \lfloor \gamma + k \rfloor,
+  \quad \forall \gamma \in \mathds{R}, \; \forall k \in \mathds{Z}
+\end{equation}
+
+É sempre possível dizer que
+$\gamma < k \implies \lfloor \gamma \rfloor < k$,
+pois, pela definição dada para a função chão,
+$\lfloor \gamma \rfloor \le \gamma$.
+Por outro lado,
+o resultado \eqref{int+1} nos diz que
+quando $\lfloor \gamma \rfloor < k$ para um dado $k \in \mathds{Z}$,
+temos $\lfloor \gamma \rfloor + 1 \le k$,
+e podemos juntar esse resultado
+com a segunda inequação da definição da função chão,
+$\gamma < \lfloor \gamma \rfloor + 1$,
+o que nos permite dizer que $\gamma < k$.
+Ou seja, $\lfloor \gamma \rfloor < k \implies \gamma < k$.
+Resumidamente:
+\begin{equation}\label{floor-switch-lt}
+  \gamma < k \iff \lfloor \gamma \rfloor < k,
+  \quad \forall \gamma \in \mathds{R}, \; \forall k \in \mathds{Z}
+\end{equation}
+
+Uma propriedade similar pode ser encontrada
+para a inequação complementar.
+Como $\lfloor \gamma \rfloor \le \gamma$,
+temos $k \le \lfloor \gamma \rfloor \implies k \le \gamma$.
+Por outro lado,
+como $\gamma < \lfloor \gamma \rfloor + 1$,
+se admitirmos $k \le \gamma$,
+temos $k < \lfloor \gamma \rfloor + 1$,
+e por esta ser uma inequação de inteiros,
+o resultado \eqref{int+1} nos permite dizer que
+$k < \lfloor \gamma \rfloor + 1 \iff
+ k + 1 \le \lfloor \gamma \rfloor + 1 \iff
+ k \le \lfloor \gamma \rfloor$.
+Portanto:
+\begin{equation}\label{floor-switch-ge}
+  \gamma \ge k \iff \lfloor \gamma \rfloor \ge k,
+  \quad \forall \gamma \in \mathds{R}, \; \forall k \in \mathds{Z}
+\end{equation}
+
+A última justificativa fornecida
+também se aplica quando admitimos $k < \gamma$,
+de forma que:
+\begin{equation}\label{floor-lt2ge-int}
+  \gamma > k
+  \implies
+  \lfloor \gamma \rfloor \ge k
+  \quad \forall \gamma \in \mathds{R}, \; \forall k \in \mathds{Z}
+\end{equation}
+
+Aplicando a definição da função chão
+sobre $\lfloor \gamma \rfloor / n$, $n \in \mathds{N}^*$,
+e multiplicando o resultado por $n$, temos:
+\[
+      \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+    \le
+      \dfrac{\left\lfloor \gamma \right\rfloor}{n}
+    <
+      \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+      + 1
+  \quad\iff\quad
+      n \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+    \le
+      \left\lfloor \gamma \right\rfloor
+    <
+      n \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+      + n
+  \quad\stackfirst{
+    m =
+    \left\lfloor
+      {}^{\scriptstyle\lfloor \gamma \rfloor} / {}_{\scriptstyle n}
+    \right\rfloor
+  }{\iff}\quad
+    n m \le \left\lfloor \gamma \right\rfloor < n m + n
+\]
+
+O resultado \eqref{floor-switch-lt}
+aplicado à desigualdade $\left\lfloor \gamma \right\rfloor < n m + n$
+resulta em $\gamma < n m + n$,
+e o resultado \eqref{floor-switch-ge} nos diz que
+a desigualdade $n m \le \left\lfloor \gamma \right\rfloor$
+pode ser escrita como $n m \le \gamma$.
+Continuando:
+\[
+  n m \le \left\lfloor \gamma \right\rfloor < n m + n
+  \quad\stackfirst{\eqref{floor-switch-lt}\text{ e }
+                   \eqref{floor-switch-ge}}{\iff}\quad
+  n m \le \gamma < n m + n
+  \quad\stackfirst{n > 0}{\iff}\quad
+  m \le \dfrac{\gamma}{n} < m + 1
+\]
+Que consiste novamente na definição da função chão, pois $m$ é inteiro.
+Isto é, $m = \lfloor \gamma / n \rfloor$.
+Finalmente:
+\begin{equation}\label{floor-nested-ratio}
+  \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+  =
+  \left\lfloor \dfrac{\gamma\vphantom{l}}{n} \right\rfloor
+  \quad \forall \gamma \in \mathds{R}, \; \forall n \in \mathds{N}^*
+\end{equation}
