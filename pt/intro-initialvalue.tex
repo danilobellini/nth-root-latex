@@ -7,12 +7,36 @@ isto é, tal valor satisfaz a restrição definida pelo algoritmo.
 Porém, o valor adotado é tipicamente menor que $x$:
 \[
   a_0 = \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+      = \left\lceil \dfrac{x\vphantom{l}}{n} \right\rceil
 \]
-Não é difícil notar que para valores grandes de $x$,
-esse valor inicial será próximo de $x/n$.
+Para valores grandes de $x$, esse valor inicial será próximo\footnote{
+  Como $\lceil x/n \rceil - 1 < x/n \le \lceil x/n \rceil$
+  pela definição da função teto,
+  temos $0 \le \lceil x/n \rceil - x/n < 1$.
+  Admitindo $n$ constante, a diferença $\lceil x/n \rceil - x/n$
+  torna-se menos significativa quanto maior o valor de $x$.
+  \[
+    \lim_{x\to\infty} \dfrac{\lceil x/n \rceil}{x/n}
+    =
+    \lim_{x\to\infty} \cancelto{0\;(\text{Limitada}/\infty)}{
+                        \dfrac{\lceil x/n \rceil - x/n}{x/n}
+                      } +
+                      \dfrac{x/n}{x/n}
+    = 1
+  \]
+}
+de $x/n$.
+A justificativa para a equivalência
+entre as duas expressões para o valor inicial
+é fornecida após a identificação das propriedades
+das funções envolvidas.
+Para todo o restante do texto, apenas a função chão é necessária.
 
 O resultado da aplicação da função chão
-nunca é maior que o valor sobre o qual ela é aplicada,
+nunca é maior que o valor sobre o qual ela é aplicada\footnote{
+  A definição da função chão é fornecida adiante no texto,
+  por hora é suficiente saber que $\lfloor \gamma \rfloor \le \gamma$.
+},
 o que nos permite escrever:
 \[
   \overbrace{\left\lfloor \dfrac{x - 1}{n} \right\rfloor}^{a_0 - 1}
@@ -22,7 +46,8 @@ o que nos permite escrever:
 \]
 
 Quando essa escolha de $a_0$
-é pior que a adoção do próprio $x$ como valor inicial?
+é mais distante da solução
+que a adoção do próprio $x$ como valor inicial?
 Isto é, quais são os valores de $x$ e $n$
 que fazem com que $a_0 > x$?
 Para responder a tais perguntas,
