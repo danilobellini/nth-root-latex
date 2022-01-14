@@ -1,0 +1,138 @@
+\subsection*{Desigualdade entre as médias aritmética e geométrica}
+
+Dados $n \in \mathds{N}^*$ e números reais $y_i \ge 0$,
+a desigualdade entre as médias aritmética e geométrica
+consiste em dizer que
+\emph{a média aritmética é maior ou igual à média geométrica}, isto é:
+\[
+    \overbrace{
+      \dfrac{1}{n} \sum_{i=1}^n y_i
+    }^{\mathclap{\text{Média aritmética}}}
+  \ge
+    \underbrace{
+      \sqrt[n]{\prod_{i=1}^n y_i}
+    }_{\mathclap{\text{Média geométrica}}}
+\]
+Para $n = 1$ esse resultado é imediato,
+visto que ambas as médias de um único elemento
+são iguais a esse próprio elemento.
+Para $n = 2$, também sabemos que a desigualdade é verdadeira, pois:
+\begin{align*}
+    (y_1 - y_2)^2 \ge 0
+  &\iff
+    y_1^2 - 2 y_1 y_2 + y_2^2 \ge 0
+  \\&\iff
+    y_1^2 + 2 y_1 y_2 + y_2^2 \ge 4 y_1 y_2
+  \\&\iff
+    (y_1 + y_2)^2 \ge 4 y_1 y_2
+  \\&\stackrel{\rule[-.3em]{0pt}{0pt}y_i \ge 0}{\iff}\vphantom{\int}
+    y_1 + y_2 \ge 2 \sqrt{y_1 y_2}
+  \\&\iff
+    \dfrac{y_1 + y_2}{2} \ge \sqrt{y_1 y_2}
+\end{align*}
+
+É possível provar essa desigualdade para qualquer $n \in \mathds{N}^*$
+por meio de duas induções em direções opostas.
+Para a primeira indução, admita que $n = 1$ ou $n = 2$ é o caso base.
+Se a desigualdade vale para $n$ elementos,
+ela também valerá para $2n$ elementos, pois:
+\[
+    \dfrac{1}{2n} \sum_{i=1}^{2n} y_i
+  =
+    \dfrac{1}{2}
+    \left(
+      \dfrac{1}{n} \sum_{i=1}^{n} y_i +
+      \dfrac{1}{n} \sum_{i=n+1}^{2n} y_i
+    \right)
+  \stackfirst{\text{(H)}}{\ge}
+    \dfrac{1}{2}
+    \left(\vphantom{\sqrt{\prod_{i=1}^n}}\right.
+      \underbrace{\sqrt[n]{\prod_{i=1}^n y_i}}_{z_1} +
+      \underbrace{\sqrt[n]{\prod_{i=n+1}^{2n} y_i}}_{z_2}
+    \left.\vphantom{\sqrt{\prod_{i=1}^n}}\right)
+  \stackfirst{\text{(B)}}{\ge}
+    \underbrace{
+      \sqrt{ \left( \sqrt[n]{\prod_{i=1}^n y_i} \right)
+             \left( \sqrt[n]{\prod_{i=n+1}^{2n} y_i} \right) }
+    }_{\sqrt{z_1 z_2}}
+\]\[
+    \dfrac{1}{2n} \sum_{i=1}^{2n} y_i
+  \ge
+    \sqrt{ \sqrt[n]{ \left( \prod_{i=1}^n y_i \right)
+                     \left( \prod_{i=n+1}^{2n} y_i \right) } }
+  =
+    \sqrt[2n]{\prod_{i=1}^{2n} y_i}
+\]
+Em que (H) denota o uso da \emph{hipótese} dessa indução
+para os $2$ conjuntos,
+e (B) denota o uso do resultado encontrado para $n = 2$
+aplicado aos valores $z_i$ indicados.
+Isso prova que a desigualdade entre as médias aritmética e geométrica
+vale para todas as potências de $2$, isto é,
+para $n = 2^m$, $m \in \mathds{N}^*$.
+Com isso já sabemos que não há um valor máximo
+para o qual a desigualdade vale\footnote{
+  Se adotarmos $w = \lceil\log_2 n\rceil$, sabemos que $n \le 2^w$
+  pelo fato de todas as funções envolvidas serem não-decrescentes.
+  Para qualquer $n$,
+  podemos construir uma potência de $2$ maior ou igual a $n$,
+  e $2^w$ é a menor potência de $2$ que satisfaz esse requisito.
+},
+e podemos realizar uma indução no sentido inverso,
+na qual podemos adotar qualquer potência de $2$ como novo caso base.
+
+Adotando $n = 2^m$ para qualquer $m \in \mathds{N}^*$ como caso base,
+e admitindo como hipótese de indução
+que a desigualdade entre as médias aritmética e geométrica
+vale para $n$ elementos,
+queremos mostrar que ela também valerá para $n-1$ elementos.
+Para isso, podemos considerar que temos apenas $n-1$ elementos $y_i$,
+e inserimos o $n$-ésimo elemento como a média aritmética dos demais.
+Isto é, considere:
+\[
+  y_n = \dfrac{1}{n-1} \sum_{i=1}^{n-1} y_i
+\]
+Isso já nos obriga a utilizar $n \ge 2$
+como restrição deste processo,
+para evitar uma divisão por zero.
+Utilizando esse $n$-ésimo elemento, a média aritmética torna-se:
+\[
+    \dfrac{1}{n} \sum_{i=1}^{n} y_i
+  =
+    \dfrac{1}{n} \left( y_n + \sum_{i=1}^{n-1} y_i \right)
+  =
+    \dfrac{y_n}{n} + \dfrac{1}{n} \sum_{i=1}^{n-1} y_i
+  =
+    \dfrac{y_n}{n} + \dfrac{(n - 1) y_n}{n}
+  =
+    y_n
+  \stackfirst{\text{(H)}}{\ge}
+    \sqrt[n]{\prod_{i=1}^n y_i}
+  =
+    \sqrt[n]{y_n \prod_{i=1}^{n-1} y_i}
+\]
+Em que o (H) denota o uso da hipótese dessa indução
+com base na expressão mais à esquerda,
+utilizando o fato de que os passos intermediários são todos iguais.
+Caso $y_n > 0$, temos:
+\[
+    y_n \ge \sqrt[n]{y_n \prod_{i=1}^{n-1} y_i}
+  \;\implies\;
+    y_n^n \ge y_n \prod_{i=1}^{n-1} y_i
+  \;\stackfirst{y_n > 0}{\implies}\;
+    y_n^{n-1} \ge \prod_{i=1}^{n-1} y_i
+  \;\implies\;
+    y_n \ge \sqrt[n-1]{\prod_{i=1}^{n-1} y_i}
+\]
+Que é exatamente a desigualdade entre as médias aritmética e geométrica
+para $n - 1$ elementos.
+Caso $y_n = 0$, todos os elementos $y_i$ precisarão ser iguais a zero,
+visto que esta é uma soma de números não-negativos,
+e isso resulta na igualdade das duas médias (ambas iguais a zero),
+o que também satisfaz
+a desigualdade entre as médias aritmética e geométrica.
+
+Dado que o caso base pode ser arbitrariamente grande,
+essa segunda indução mostra que a desigualdade é válida
+para qualquer $n \ge 2$,
+``preenchendo as lacunas'' dos números que não são potências de $2$.

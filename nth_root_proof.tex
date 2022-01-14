@@ -108,53 +108,7 @@ a sequência inteira será formada apenas por números positivos.
 Porém, podemos restringir ainda mais
 os possíveis valores de $\alpha_{k+1}$.
 Para isso, basta lembrar
-da desigualdade das médias aritmética e geométrica\footnote{
-  É possível provar a desigualdade
-  $\sum_{i=1}^n y_i \ge n \sqrt[n]{\prod_{i=1}^n y_i}$,
-  por meio de duas induções em direções opostas.
-  O caso base é:
-  \[
-    (y_1 - y_2)^2 \ge 0
-    \implies y_1^2 - 2 y_1 y_2 + y_2^2 \ge 0
-    \implies y_1^2 + 2 y_1 y_2 + y_2^2 \ge 4 y_1 y_2
-    \implies (y_1 + y_2)^2 \ge 4 y_1 y_2
-    \implies y_1 + y_2 \ge 2 \sqrt{y_1 y_2}
-  \]
-  Se a desigualdade vale para $n$ elementos,
-  ela também valerá para $2n$ elementos
-  (prova para as potências de $2$):
-  \[
-    \sum_{i=1}^{2n} y_i
-    = \sum_{i=1}^{n} y_i + \sum_{i=n+1}^{2n} y_i
-    \ge n \left( \sqrt[n]{\prod_{i=1}^n y_i}
-               + \sqrt[n]{\prod_{i=n+1}^{2n} y_i} \right)
-    \ge n 2 \sqrt{ \left( \sqrt[n]{\prod_{i=1}^n y_i} \right)
-                   \left( \sqrt[n]{\prod_{i=n+1}^{2n} y_i} \right) }
-    = 2n \sqrt[2n]{\prod_{i=1}^{2n} y_i}
-  \]
-  Se tal desigualdade vale para $n$ elementos,
-  ela também valerá para $n-1$ elementos.
-  Considere $y_n = \dfrac{1}{n-1} \sum_{i=1}^{n-1} y_i$:
-  \[
-    \sum_{i=1}^{n} y_i
-    = \sum_{i=1}^{n-1} y_i + \dfrac{1}{n-1} \sum_{i=1}^{n-1} y_i
-    = \left( 1 + \dfrac{1}{n-1} \right) \sum_{i=1}^{n-1} y_i
-    = \dfrac{n}{n-1} \sum_{i=1}^{n-1} y_i
-    \ge n \sqrt[n]{\prod_{i=1}^n y_i}
-    = n \sqrt[n]{\prod_{i=1}^{n-1} y_i
-                 \left( \dfrac{1}{n-1} \sum_{j=1}^{n-1} y_j \right)}
-  \]
-  Dividindo por $n$ cada lado da desigualdade e elevando a $n$:
-  \[
-    \left( \dfrac{1}{n-1}
-           \sum_{i=1}^{n-1} y_i \right)^{\cancelto{n-1}{n}}
-    \ge \prod_{i=1}^{n-1} y_i
-        \cancel{\left( \dfrac{1}{n-1} \sum_{j=1}^{n-1} y_j \right)}
-    \implies
-    \sum_{i=1}^{n-1} y_i \ge (n-1) \sqrt[n-1]{\prod_{i=1}^{n-1} y_i}
-  \]
-  \hfill$\blacksquare$
-}:
+da desigualdade das médias aritmética e geométrica:
 \[
   \dfrac{(n-1) \alpha_k + \delta_{k+1}}{n} \ge
   \sqrt[n]{\alpha_k^{n-1} \delta_{k+1}}
