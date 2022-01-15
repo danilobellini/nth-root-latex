@@ -1,54 +1,118 @@
 \subsection*{Sinal do passo e condição de parada}
 
-Suponha $a_k = \sqrt[n]{x}$.
-Como $a_k \in \mathds{N}$,
-também sabemos que $\sqrt[n]{x} = \lfloor \sqrt[n]{x} \rfloor$.
-Elevando a $n$ cada lado da igualdade, obtemos $a_k^n = x$,
-o que significa que $p_{k+1} = 0$,
-ou seja, a continuação da sequência será constante,
-igual a $\sqrt[n]{x}$.
-O resultado $a_k$ já é o valor da raiz desejada,
-não sendo necessário continuar o processo iterativo.
-
-Suponha $a_k > \sqrt[n]{x}$.
-Nesse caso, $a_k^n > x$, e portanto $x - a_k^n < 0$,
-i.e., o numerador de $p_{k+1}$ é negativo.
-Logo $p_{k+1} \le -1$, pois seu denominador é positivo
-e o resultado da função chão aplicada a qualquer número negativo
-é sempre um número inteiro negativo.
-
-Suponha $\lfloor \sqrt[n]{x} \rfloor \le a_k < \sqrt[n]{x}$.
-Obviamente, isso somente poderá ocorrer
-se $\lfloor \sqrt[n]{x} \rfloor \ne \sqrt[n]{x}$.
-Pela definição da função chão, temos
-$\lfloor\sqrt[n]{x}\rfloor \le a_k < \lfloor\sqrt[n]{x}\rfloor + 1$,
-o que nos obriga a dizer que $a_k = \lfloor\sqrt[n]{x}\rfloor$
-pelo fato de $a_k$ ser sempre um número inteiro.
-Nesse contexto, temos:
+Utilizando os resultados acerca da função chão
+apresentados em \eqref{floor-switch-lt} e \eqref{floor-switch-ge},
+podemos relacionar o sinal dos valores de $a_k$, $p_{k+1}$ e $d_{k+1}$:
 \[
-  \underbrace{\lfloor \sqrt[n]{x} \rfloor}_{a_k} < \sqrt[n]{x}
-  \quad\implies\quad
-  a_k^n < x
-  \quad\implies\quad
-  x - a_k^n > 0
-  \quad\implies\quad
-  \dfrac{x - a_k^n}{na_k^{n-1}} > 0
-  \quad\implies\quad
+  \overbrace{
+    \left\lfloor \dfrac{x - a_k^n}{na_k^{n-1}} \right\rfloor
+  }^{p_{k+1}} < 0
+  \;\stackfirst{\eqref{floor-switch-lt}}{\iff}\;
+  \dfrac{x - a_k^n}{na_k^{n-1}} < 0
+  \;\stackfirst{a_k > 0}{
+      \underset{n > 0\vphantom{\int}}{\iff}
+    }\;
+  x - a_k^n < 0
+  \;\iff\;
+  \overset{
+    \mathclap{\substack{
+      \displaystyle a_k > \sqrt[n]{x} \\[.5em]
+      \displaystyle \Big\Updownarrow \\[.5em]
+    }}
+  }{a_k^n > x}
+  \;\stackfirst{a_k > 0}{\iff}\;
+  a_k > \dfrac{x}{a_k^{n-1}}
+  \;\underset{\eqref{floor-switch-lt}}{
+      \stackfirst{a_k \in \mathds{N}}{\iff}
+    }\;
+  a_k > \overbrace{
+          \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor
+        }^{d_{k+1}}
+\]
+\[
   \underbrace{
     \left\lfloor \dfrac{x - a_k^n}{na_k^{n-1}} \right\rfloor
   }_{p_{k+1}} \ge 0
+  \;\stackfirst{\eqref{floor-switch-ge}}{\iff}\;
+  \dfrac{x - a_k^n}{na_k^{n-1}} \ge 0
+  \;\stackfirst{a_k > 0}{
+      \underset{n > 0\vphantom{\int}}{\iff}
+    }\;
+  x - a_k^n \ge 0
+  \;\iff\;
+  \underset{
+    \mathclap{\substack{\\[.4em]
+      \displaystyle \Big\Updownarrow \\[.5em]
+      \displaystyle a_k \le \sqrt[n]{x}
+    }}
+  }{a_k^n \le x}
+  \;\stackfirst{a_k > 0}{\iff}\;
+  a_k \le \dfrac{x}{a_k^{n-1}}
+  \;\underset{\eqref{floor-switch-ge}}{
+      \stackfirst{a_k \in \mathds{N}}{\iff}
+    }\;
+  a_k \le \underbrace{
+            \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor
+          }_{d_{k+1}}
 \]
-
-Resumidamente, o que está escrito acima pode ser escrito como:
+Tal resultado pode ser resumido como:
 \[
-\begin{cases}
-  a_k > \sqrt[n]{x} &\implies\;\; p_{k+1} < 0 \\
-  a_k \le \sqrt[n]{x} &\implies\;\; p_{k+1} \ge 0
-\end{cases}
+  \begin{array}{lcccr}
+    p_{k+1}   < 0 &\iff& a_k   > \sqrt[n]{x} &\iff& a_k   > d_{k+1} \\
+    p_{k+1} \ge 0 &\iff& a_k \le \sqrt[n]{x} &\iff& a_k \le d_{k+1}
+  \end{array}
 \]
+Resta ainda entender melhor o cenário em que $a_k \le \sqrt[n]{x}$,
+bem como a forma com a qual esse resultado
+se relaciona com a corretude do algoritmo e o critério de parada.
 
-Como $a_k \le \sqrt[n]{x}$ na realidade significa
-$a_k = \lfloor \sqrt[n]{x} \rfloor$,
+Suponha $\lfloor \sqrt[n]{x} \rfloor \le a_k < \sqrt[n]{x}$.
+Pela definição da função chão, temos
+$\sqrt[n]{x} < \lfloor\sqrt[n]{x}\rfloor + 1$.
+Juntar as desigualdades fornece
+$\lfloor\sqrt[n]{x}\rfloor \le a_k < \lfloor\sqrt[n]{x}\rfloor + 1$,
+o que nos obriga a dizer que $a_k = \lfloor\sqrt[n]{x}\rfloor$
+pelo fato de $a_k$ ser sempre um número inteiro
+$a_k = \lfloor a_k \rfloor$,
+e pelas últimas desigualdades consistirem
+na própria definição da função chão.
+Isto é:
+\[
+  \lfloor \sqrt[n]{x} \rfloor \le a_k < \sqrt[n]{x}
+  \quad\implies\quad
+  a_k = \lfloor \sqrt[n]{x} \rfloor
+\]
+Por outro lado, suponha $a_k = \sqrt[n]{x}$.
+Como $a_k \in \mathds{N}^*$,
+também sabemos que $\sqrt[n]{x} = \lfloor \sqrt[n]{x} \rfloor$.
+Isso significa que
+quando $\lfloor \sqrt[n]{x} \rfloor \le a_k \le \sqrt[n]{x}$,
+então $a_k = \lfloor \sqrt[n]{x} \rfloor$.
+Como a desigualdade entre as médias aritmética e geométrica
+anteriormente nos indicou que
+$a_{k+1} \ge \lfloor \sqrt[n]{x} \rfloor$
+podemos reescrever
+a relação entre o sinal dos valores de $a_k$, $p_{k+1}$ e $d_{k+1}$
+como uma variante mais restrita,
+admindo que $k > 0$ ou $a_0 \ge \lfloor \sqrt[n]{x} \rfloor$:
+\[
+  \begin{array}{lcccr}
+      p_{k+1} < 0
+    &\iff&
+      a_k > \sqrt[n]{x}
+    &\iff&
+      a_k > d_{k+1}
+    \\
+      p_{k+1} \ge 0
+    &\underset{\substack{k > 0 \text{ ou} \\[.2em]
+                         a_0 \ge \lfloor \sqrt[n]{x} \rfloor}}{\iff}&
+      a_k = \lfloor \sqrt[n]{x} \rfloor
+    &\underset{\substack{k > 0 \text{ ou} \\[.2em]
+                         a_0 \ge \lfloor \sqrt[n]{x} \rfloor}}{\iff}&
+      a_k \le d_{k+1}
+  \end{array}
+\]
+Dessa forma,
 podemos considerar que o critério de parada é $p_{k+1} \ge 0$.
 Em outras palavras,
 \emph{o processo iterativo deve continuar
@@ -59,41 +123,7 @@ Como estamos lidando apenas com valores inteiros,
 isso também significa que o resultado é obtido
 após um número finito de iterações.
 
-Há ainda outra forma de consultar essa condição de parada,
-utilizando propriedades da função chão:
-\[
-  \left\lfloor \dfrac{x - a_k^n}{na_k^{n-1}} \right\rfloor < 0
-  \;\iff\;
-  \dfrac{x - a_k^n}{na_k^{n-1}} < 0
-  \;\stackfirst{a_k > 0}{\iff}\;
-  x - a_k^n < 0
-  \;\iff\;
-  a_k^n > x
-  \;\stackfirst{a_k > 0}{\iff}\;
-  a_k > \dfrac{x}{a_k^{n-1}}
-  \;\stackfirst{a_k \in \mathds{N}}{\iff}\;
-  a_k > \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor
-\]
-\[
-  \left\lfloor \dfrac{x - a_k^n}{na_k^{n-1}} \right\rfloor \ge 0
-  \;\iff\;
-  \dfrac{x - a_k^n}{na_k^{n-1}} \ge 0
-  \;\stackfirst{a_k > 0}{\iff}\;
-  x - a_k^n \ge 0
-  \;\iff\;
-  a_k^n \le x
-  \;\stackfirst{a_k > 0}{\iff}\;
-  a_k \le \dfrac{x}{a_k^{n-1}}
-  \;\stackfirst{a_k \in \mathds{N}}{\iff}\;
-  a_k \le \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor
-\]
-
-Como $d_{k+1} = \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor$,
-a condição de parada é $a_k \le d_{k+1}$:
-\[
-\begin{cases}
-  a_k > \sqrt[n]{x} &\implies\;\; a_k > d_{k+1} \\
-  a_k \le \sqrt[n]{x} &\implies\;\; a_k \le d_{k+1}
-\end{cases}
-\]
-O que corresponde à descrição do algoritmo.
+Equivalentemente, para não ser necessário calcular o passo,
+a condição de parada é $a_k \le d_{k+1}$,
+o que corresponde à descrição do algoritmo,
+finalizando a prova de sua corretude.
