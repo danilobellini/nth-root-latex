@@ -43,10 +43,9 @@
     (8.305626200813814, 0.1952409256907805)
       -- (7.485064339688552, 0);
 
-  \foreach \x/\xtext in {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                         11, 12, 13, 14, 15, 16}
+  \foreach \x in {1, ..., 16}
     \draw[shift={(\x, 0)}] (0pt, 2pt) -- (0pt, -2pt) node[below] {};
-  \foreach \y in {1, 2, 3, 4, 5, 6, 7, 8}
+  \foreach \y in {1, ..., 8}
     \draw[shift={(0, \y)}] (2pt, 0pt) -- (-2pt, 0pt) node[left] {};
 
 \end{tikzpicture}
