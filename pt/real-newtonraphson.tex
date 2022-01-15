@@ -1,0 +1,79 @@
+\subsection*{O método de Newton-Raphson}
+
+O método de Newton-Raphson consiste em um procedimento numérico
+para a obtenção de uma sequência que, caso seja convergente,
+converge para uma raiz de uma dada função contínua e derivável
+$f:\mathds{R}\to\mathds{R}$, isto é,
+dado $\alpha_k \in \mathds{R}$ o método fornece
+um equacionamento para $\alpha_{k+1}$,
+e, se a sequência é definida para todo $k \in \mathds{N}$ e convergente,
+$f(\alpha_k) \to 0$ quando $k \to \infty$.
+Especificamente,
+a regra de iteração do método de Newton-Raphson
+consiste no uso da reta tangente à função
+no ponto $\big(\alpha_k, f(\alpha_k)\big)$,
+definindo a nova abscissa $\alpha_{k+1}$
+como a raiz dessa aproximação linear da função.
+Esse processo está ilustrado na figura~\ref{fig:newton-raphson}.
+
+\begin{figure}[h!]
+  \centering
+  \input{newton_raphson_tikz.tex}
+  \caption{Ilustração do método de Newton-Raphson}
+  \label{fig:newton-raphson}
+\end{figure}
+
+Uma reta não-vertical pode ser escrita como uma função,
+a qual pode ser encontrada
+a partir de seu coeficiente angular e de um ponto conhecido.
+Seja $g_k(\alpha):\mathds{R}\to\mathds{R}$ a reta
+que possui um fragmento representado na figura~\ref{fig:newton-raphson}
+como uma flecha unindo os pontos
+$\big(\alpha_k, f(\alpha_k)\big)$ e $\big(\alpha_{k+1}, 0\big)$.
+Sabemos que a variação média e a variação instantânea de uma reta
+são sempre iguais, isto é,
+$\Delta g_k / \Delta \alpha$ é uma constante,
+e seu valor é igual ao da derivada $g'_k(\alpha) = c_k$,
+a qual também é constante para toda a reta.
+Explicitamente:
+\[
+  c_k = g'_k(\alpha)
+  =
+    \lim_{h \to 0}
+      \dfrac{g_k(\alpha + h) - g_k(\alpha)}{h}
+  =
+    \dfrac{\Delta g_k}{\Delta \alpha}
+  =
+    \dfrac{g_k(\alpha_k) - g_k(\alpha_{k+1})}{\alpha_k - \alpha_{k+1}}
+\]
+De onde é possível obter a equação da reta:
+\[
+  g_k(\alpha_k) - g_k(\alpha_{k+1}) =
+  c_k(\alpha_k - \alpha_{k+1})
+\]
+
+Como o ponto $\big(\alpha_{k+1}, 0\big)$ pertence à reta.
+sabemos que a raiz da aproximação linear é $g_k(\alpha_{k+1}) = 0$.
+Também sabemos que o ponto de tangência
+pertence tanto à função $f(\alpha)$
+quanto à reta tangente $g_k(\alpha)$, isto é,
+$\big(\alpha_k, f(\alpha_k)\big) = \big(\alpha_k, g_k(\alpha_k)\big)$,
+ou simplesmente $g_k(\alpha_k) = f(\alpha_k)$.
+Além disso, a inclinação nesse ponto de tangência
+deve ser a mesma para ambas as funções $f(\alpha)$ e $g_k(\alpha)$,
+de forma que $f'(\alpha_k) = g_k'(\alpha_k) = c_k$.
+Podemos aplicar essas informações na equação da reta:
+\[
+    \underbrace{g_k(\alpha_k)}_{f(\alpha_k)}
+    - \cancelto{0}{g_k(\alpha_{k+1})}
+  =
+    \underbracket[1.1pt]{c_k}_{\mathclap{f'(\alpha_k)}}
+    (\alpha_k - \alpha_{k+1})
+  \quad\stackfirst{f'(\alpha_k) \ne 0}{\implies}\quad
+  \dfrac{f(\alpha_k)}{f'(\alpha_k)} = \alpha_k - \alpha_{k+1}
+\]
+O que nos permite obter a recorrência
+que define a sequência do método de Newton-Raphson:
+\[\tag{NR}
+  \alpha_{k+1} = \alpha_k - \dfrac{f(\alpha_k)}{f'(\alpha_k)}
+\]

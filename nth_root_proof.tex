@@ -13,9 +13,10 @@
 \input{\getpdflang/abstract.tex}
 \input{pt/intro.tex}
 \input{pt/prelim.tex}
+\input{pt/real.tex}
 
 
-\section*{Uma recorrência similar a partir do método de Newton-Raphson}
+\subsection*{Recorrência em $\mathds{R}$ para encontrar $\sqrt[n]{x}$}
 
 Seja $f(\alpha) = \alpha^n - x$
 em que $\alpha \in \mathds{R}$ e $x, n \in \mathds{N}^*$.
@@ -29,45 +30,8 @@ no domínio $\alpha > 0$.
 Isso nos diz que a raiz $n$-ésima de $x$
 é o único zero real positivo dessa função.
 
-A regra de iteração do método de Newton-Raphson
-sobre uma função $f:\mathds{R}\to\mathds{R}$
-consiste no uso da raiz (ou zero)
-da aproximação linear em torno do ``ponto atual'' da função
-como a nova abscissa que será utilizada
-para obter o ``ponto seguinte'' da sequência.
-Esse processo está ilustrado na figura~\ref{fig:newton-raphson}.
-
-\begin{figure}[H]
-  \centering
-  \input{newton_raphson_tikz.tex}
-  \caption{Ilustração do método de Newton-Raphson}
-  \label{fig:newton-raphson}
-\end{figure}
-
-A aproximação linear\footnote{
-  Essa equação é dada na forma $g - g_0 = m (\alpha - \alpha_0)$,
-  ou, equivalentemente,
-  $g(\alpha) - g(\alpha_0) = m (\alpha - \alpha_0)$,
-  em que o coeficiente angular $m$ é a derivada da função $g(\alpha)$.
-} em torno da abscissa $\alpha_k$
-é a reta tangente à função $f(\alpha)$ nesse ponto,
-e é dada por
-$g(\alpha_{k+1}) - g(\alpha_k) =
- f'(\alpha_k) \left( \alpha_{k+1} - \alpha_k \right)$,
-em que:
-\begin{itemize}
-  \item
-  $g(\alpha_k) = f(\alpha_k)$, pois a aproximação linear
-  passa pelo mesmo ponto $(\alpha_k, f(\alpha_k))$ da função; e
-  \item
-  $g(\alpha_{k+1}) = 0$,
-  pois queremos o zero da aproximação linear.
-\end{itemize}
-
-Isso permite obter a recorrência
-que define a sequência do método de Newton-Raphson:
-\[\alpha_{k+1} = \alpha_k - \dfrac{f(\alpha_k)}{f'(\alpha_k)}\]
-Aplicando os valores de $f(\alpha)$ e $f'(\alpha)$:
+Aplicando os valores de $f(\alpha)$ e $f'(\alpha)$
+à equação da sequência do método de Newton-Raphson:
 \[
   \begin{array}{rcl}
   \alpha_{k+1}
