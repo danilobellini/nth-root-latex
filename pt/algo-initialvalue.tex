@@ -7,7 +7,29 @@ e uma ocorrência de $x/a_k^{n-1}$:
   \dfrac{(n-1) a_k + \dfrac{x}{a_k^{n-1}}}{n} \ge
   \sqrt[n]{a_k^{n-1} \dfrac{x}{a_k^{n-1}}}
 \]
-Aplicando a função chão de cada lado da inequação, temos, de imediato:
+Aplicando a função chão em cada lado da inequação\footnote{
+  Dado $\gamma \le \beta$, sabemos que
+  $\lfloor \gamma \rfloor \le \beta$,
+  pois $\lfloor \gamma \rfloor \le \gamma$
+  pela definição da função chão.
+  Aplicando o resultado \eqref{floor-switch-ge}
+  à inequação $\lfloor \gamma \rfloor \le \beta$
+  fornece $\lfloor \gamma \rfloor \le \lfloor \beta \rfloor$.
+  Analogamente, dado $\gamma < \beta$,
+  sabemos que $\lfloor \gamma \rfloor < \beta$
+  pela definição da função chão,
+  e aplicando o resultado \eqref{floor-lt2ge-int}
+  obtemos $\lfloor \gamma \rfloor \le \lfloor \beta \rfloor$.
+  Resumidamente,
+  é sempre possível aplicar a função chão
+  nos dois lados de uma inequação,
+  mas a inequação do resultado deverá ser não-estrita.
+  O mesmo resultado pode ser interpretado
+  como consequência do fato
+  de que a função chão é monotônica não-decrescente,
+  mas não é estritamente crescente.
+},
+temos:
 \[
   a_{k+1} \ge \lfloor \sqrt[n]{x} \rfloor
 \]
