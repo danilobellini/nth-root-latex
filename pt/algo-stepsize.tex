@@ -19,10 +19,13 @@ Podemos reorganizar o valor de $a_{k+1}$ da seguinte forma:
       \dfrac{x - a_k^n}{na_k^{n-1}}
     \right\rfloor
 \]
-Como $a_k \in \mathds{N}$, podemos retirar da função chão:
+Como $a_k \in \mathds{N}$, podemos,
+de acordo com a equação \eqref{floor-int},
+retirar $a_k$ da função chão:
 \[
-  a_{k+1}
-  = a_k +
+    a_{k+1}
+  \stackfirst{\eqref{floor-int}}{=}
+    a_k +
     \left\lfloor
       \dfrac{x - a_k^n}{na_k^{n-1}}
     \right\rfloor

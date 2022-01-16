@@ -1,20 +1,23 @@
 \subsection*{Função chão interna}
 
-Devido às propriedades da função chão,
+Devido aos resultados \eqref{floor-int} e \eqref{floor-nested-ratio}
+relativos à função chão,
 podemos reescrever $a_{k+1}$ como:
 \[
-  a_{k+1}
-  = \bracketize[.75em]{\lfloor}{\rfloor}{
+    a_{k+1}
+  \stackfirst{\eqref{floor-nested-ratio}}{=}
+    \bracketize[.75em]{\lfloor}{\rfloor}{
       \dfrac{\left\lfloor
                (n-1) a_k + \dfrac{x}{a_k^{n-1}}
              \right\rfloor}
             {n}
-    } \\
-  = \bracketize[.75em]{\lfloor}{\rfloor}{
+    }
+  \stackfirst{\eqref{floor-int}}{=}
+    \bracketize[.75em]{\lfloor}{\rfloor}{
       \dfrac{(n-1) a_k +
              \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor}
             {n}
-    } \\
+    }
 \]
 Pois o denominador $n$ é um inteiro positivo,
 e a parcela $(n - 1) a_k$ é inteira.
@@ -27,5 +30,5 @@ ao algoritmo inicialmente proposto:
 \]
 
 Isso significa que a aplicação da função chão interna
-na definição da recorrência $a_k$ não altera em nada o falor de $a_k$,
+na definição da recorrência $a_k$ não altera em nada o valor de $a_k$,
 desde que a função chão externa seja mantida.
