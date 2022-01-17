@@ -19,7 +19,6 @@
 \RequirePackage{inconsolata}
 
 \RequirePackage{tikz}
-\usetikzlibrary{arrows}
 
 % Store the PDFLANG environment variable in \getpdflang
 \ExplSyntaxOn
@@ -99,4 +98,32 @@
 % Custom \stackrel alternative better suited for \iff and \implies
 \newcommand{\stackfirst}[2]{%
   \stackrel{#1}{\rule{0pt}{.7em}#2\rule{0pt}{.7em}}%
+}
+
+% Custom TikZ configuration
+\usetikzlibrary{arrows, decorations.pathreplacing}
+
+\tikzset{
+  brace/.style={
+    decorate,
+    decoration={brace, amplitude=.3em, raise=.15em},
+  },
+  brace80/.style={brace, decoration={aspect=.8}},
+  eq-overlay/.style={
+    overlay,
+    remember picture,
+    baseline=0pt,
+    anchor=base,
+    line width=1.1pt,
+  }
+}
+
+\newcommand{\tikzeq}[2]{%
+  \tikz[
+    remember picture,
+    baseline=0pt,
+    inner sep=0pt,
+    outer sep=0pt,
+    anchor=base,
+  ] \node (#1) {$#2$};%
 }
