@@ -1,0 +1,363 @@
+\subsection*{Convergência de sequências}
+
+Uma \emph{sequência} de números reais
+é uma função $q:\mathds{N}\to\mathds{R}$
+para a qual denotamos como $q_k$ seu $k$-ésimo elemento,
+também chamado de \emph{termo geral}.
+Podemos construir uma sequência por meio de uma \emph{recorrência},
+que consiste em definir cada novo elemento da sequência
+como uma função dos elementos anteriores,
+desde que fixados valores iniciais
+que permitam construir o restante da sequência.
+Em particular, o algoritmo proposto
+está escrito na forma de uma recorrência.
+
+Uma sequência é dita:
+\begin{itemize}
+  \item
+    \emph{Limitada} se existe $M \ge 0$ real
+    tal que $|q_k| \le M$ para todo $k$.
+    Ou, equivalentemente, se existem $M_{\min}$ e $M_{\max}$
+    tais que  $M_{\min} \le q_k \le M_{\max}$ para todo $k$.
+  \item
+    \emph{Crescente} ou \emph{estritamente crescente}
+    quando $q_{k+1} > q_k$.
+  \item
+    \emph{Não-crescente} quando $q_{k+1} \le q_k$.
+  \item
+    \emph{Decrescente} ou \emph{estritamente decrescente}
+    quando $q_{k+1} < q_k$.
+  \item
+    \emph{Não-decrescente} quando $q_{k+1} \ge q_k$.
+  \item
+    \emph{Monotônica} ou \emph{monótona} se, para todo $k$,
+    ela for ou não-crescente, ou não-decrescente.
+    Isso também inclui os casos
+    em que a sequência é ou estritamente crescente,
+    ou estritamente decrescente.
+  \item
+    \emph{Convergente} quando
+    existe um \emph{limite} $L$ para a sequência,
+    isto é, quando,
+    para qualquer $\varepsilon > 0$,
+    existe um $K$ tal que $|q_k - L| < \varepsilon$
+    para todo $k \ge K$.
+    Tal limite pode ser indicado como
+    ``$q_k \to L$ quando $k \to \infty$'',
+    ou $\displaystyle \lim_{k\to\infty} q_k = L$.
+  \item
+    \emph{Divergente} quando não é convergente.
+\end{itemize}
+
+\textbf{Se a sequência é convergente, seu limite é único}.
+Para provar, suponha que existam dois limites distintos, $L_1$ e $L_2$,
+e, sem perda de generalidade, admita $L_2 > L_1$.
+Isso se revela uma contradição,
+pois adotando qualquer valor de $\varepsilon$
+que satisfaça $0 < \varepsilon \le (L_2 - L_1)/2$,
+podemos justificar, por contraposição,
+que pelo menos um dos limites é falso:
+\[
+  \begin{array}{l}
+        |q_k - L_1| < \varepsilon
+      \iff
+        - \varepsilon < q_k - L_1 < \varepsilon
+      \iff
+        L_1 - \varepsilon <
+        \overbrace{q_k < L_1 + \varepsilon}^{(\varepsilon_1)}
+    \\
+        |q_k - L_2| < \varepsilon
+      \iff
+        - \varepsilon < q_k - L_2 < \varepsilon
+      \iff
+        \underbrace{L_2 - \varepsilon < q_k}_{(\varepsilon_2)}
+        < L_2 + \varepsilon
+  \end{array}
+  \Bigg\}
+  \stackfirst{\mathclap{
+    (\varepsilon_1) \text{ e } (\varepsilon_2)
+  }}{\implies}
+    L_2 - \varepsilon < L_1 + \varepsilon
+  \iff
+    \varepsilon > \dfrac{L_2 - L_1}{2}
+\]
+
+\textbf{Se a sequência é convergente, então ela é limitada}.
+Como a sequência é convergente,
+há um limite $L$ para o qual ela converge.
+Fixe um valor real positivo para o $\varepsilon$.
+A definição do limite nos diz que existe um $K$
+a partir do qual vale $|q_k - L| < \varepsilon$,
+o que nos permite particionar a sequência em duas:
+os $K$ elementos iniciais da sequência,
+e os elementos a partir dos quais
+sempre vale $|q_k - L| < \varepsilon$.
+Tome
+$\displaystyle
+ M = \max\left(|L| + \varepsilon, \max_{0 \le k < K} |q_k|\right)$,
+então $|q_k| \le M$ para todo $k$,
+pois o conjunto dos $K$ elementos iniciais da sequência é limitado
+(i.e., possui valores máximo e mínimo)
+e os elementos seguintes podem ser majorados por $|L| + \varepsilon$,
+que é um número positivo:
+\[
+  \begin{array}{c}\displaystyle
+      |q_k - L| < \varepsilon
+    \iff
+      - \varepsilon < q_k - L < \varepsilon
+    \iff
+      \tikzeq{seqlimit-above}{
+        L - \varepsilon < q_k < L + \varepsilon
+      }
+    \\[1em] \displaystyle
+      -|L| - \varepsilon \le
+        \tikzeq{seqlimit-below}{
+          L - \varepsilon < q_k < L + \varepsilon
+        }
+      \le |L| + \varepsilon
+    \implies
+      -(|L| + \varepsilon) < q_k < |L| + \varepsilon
+    \iff
+      q_k < |L| + \varepsilon
+    \begin{tikzpicture}[eq-overlay]
+      \draw[brace80]
+        (seqlimit-above.south east) -- (seqlimit-above.south west);
+      \draw[brace80]
+        (seqlimit-below.north west) -- (seqlimit-below.north east);
+      \coordinate (seqlimit-below-tip) at
+        ($(seqlimit-below.north west)!.8!(seqlimit-below.north east)
+          + (0, .5em)$);
+      \coordinate (seqlimit-above-tip) at
+        ($(seqlimit-above.south east)!.8!(seqlimit-above.south west)
+          + (0, -.5em)$);
+      \draw[out=210, in=30, distance=2em, ->,
+            arrows=-{Latex[length=2mm, width=1mm]}]
+        (seqlimit-above-tip) to (seqlimit-below-tip);
+    \end{tikzpicture}
+  \end{array}
+\]
+
+\textbf{Se a sequência é monotônica e limitada,
+        então ela é convergente}.
+Dizer que a sequência é limitada
+corresponde a dizer que o conjunto de todos os elementos da sequência
+é limitado tanto superiormente como inferiormente.
+A completude dos números reais\footnote{
+  O axioma da completude dos números reais
+  também é conhecido como axioma do supremo,
+  propriedade do menor limitante superior,
+  ou cota superior.
+  Esse axioma diz que
+  todo conjunto de números reais que é limitado superiormente
+  possui um número real como menor limitante superior,
+  chamado de \emph{supremo},
+  mesmo que este não pertença ao próprio conjunto.
+  Isto significa dizer que,
+  dado um conjunto $B \subset \mathds{R}$ limitado superiormente,
+  para todo $\varepsilon > 0$
+  existe um $b \in B$
+  tal que $b > (\sup B) - \varepsilon$.
+  Analogamente
+  para conjuntos de números reais limitados inferiormente,
+  o \emph{ínfimo} é o maior limitante inferior do conjunto,
+  como consequência da aplicação desse axioma
+  sobre $C = \{-b: b \in B\}$,
+  isto é,
+  dado um conjunto $C \subset \mathds{R}$ limitado inferiormente,
+  para todo $\varepsilon > 0$
+  existe um $c \in C$
+  tal que $c < (\inf C) + \varepsilon$.
+} garante que, nesse caso, o conjunto de valores reais $q_k$
+possui um supremo e um ínfimo.
+Caso seja não-decrescente, a sequência converge para o supremo
+$S = \sup \{q_k\}$,
+e caso seja não-crescente, a sequência converge para o ínfimo
+$I = \inf \{q_k\}$,
+pois:
+\[
+  \begin{array}{r|rcl|rcl|c}
+      \multicolumn{1}{r}{} &  % Remove border
+      \multicolumn{3}{c}{\textbf{Não-decrescente}} &
+      \multicolumn{3}{c}{\textbf{Não-crescente}}
+    \\ \cline{2-7}
+      \text{Completude (axioma)}
+      &
+      \forall \varepsilon \exists k_s :
+        \varepsilon > 0 &\implies& q_{k_s} > S - \varepsilon
+      &
+      \forall \varepsilon \exists k_i :
+        \varepsilon > 0 &\implies& q_{k_i} < I + \varepsilon
+      & \text{(A)}
+    \\
+      \text{Limitada pelo supremo/ínfimo}
+      &
+      && S \ge q_k
+      &
+      && I \le q_k
+      & \text{(L)}
+    \\
+      \text{Monotônica}
+      &
+      k > k_s &\implies& q_k \ge q_{k_s}
+      &
+      k > k_i &\implies& q_k \le q_{k_i}
+      & \text{(M)}
+    \\ \cline{2-7}
+  \end{array}
+\]
+\[
+  \begin{array}{r@{\qquad}l}
+      \hfill\textbf{Monotônica não-decrescente e limitada}\hfill
+    &
+      \hfill\textbf{Monotônica não-crescente e limitada}\hfill
+    \\[1.5em]
+      \underbracket{
+        \forall \varepsilon \exists k_s :
+        \substack{
+          (\varepsilon > 0) \\[.3em]
+          \text{e} \\[.3em]
+          (k > k_s)
+        }
+        {\displaystyle\Bigg\}}
+        {\Rightarrow}
+        \left\{
+          \begin{array}{c}
+              \tikzeq{sup-a}{S - \varepsilon}
+                <
+              \tikzeq{sup-b}{q_{k_s}}
+                \le
+              \tikzeq{sup-c}{q_k}
+                \le
+              \tikzeq{sup-d}{S}
+                <
+              \tikzeq{sup-e}{S + \varepsilon}
+              \begin{tikzpicture}[eq-overlay]
+                \draw[brace]
+                  ($(sup-a.base west) + (0, .7em)$)
+                  -- node[above=.2em] {(A)}
+                  ($(sup-b.base east) + (0, .7em)$);
+                \draw[brace]
+                  ($(sup-c.base west) + (0, .7em)$)
+                  -- node[above=.2em] {(L)}
+                  ($(sup-d.base east) + (0, .7em)$);
+                \draw[brace80]
+                  ($(sup-c.base east) + (0, -.2em)$)
+                  -- node[below=.3em, pos=.8] {(M)}
+                  ($(sup-b.base west) + (0, -.2em)$);
+                \draw[brace80, decoration={mirror}]
+                  ($(sup-d.base west) + (0, -.1em)$)
+                  -- node[below=.3em, pos=.8] {$\varepsilon > 0$}
+                  ($(sup-e.base east) + (0, -.1em)$);
+              \end{tikzpicture}
+            \\[.6em]
+              \big\Downarrow
+            \\
+              S - \varepsilon < q_k < S + \varepsilon
+            \\
+              \Updownarrow
+            \\
+              - \varepsilon < q_k - S < \varepsilon
+            \\
+              \Updownarrow
+            \\
+              |q_k - S| < \varepsilon
+          \end{array}
+        \right.
+      }_{\substack{
+          \displaystyle \Downarrow
+        \\[.3em]
+          \displaystyle \lim_{k\to\infty} q_k = S = \sup \{q_k\}
+      }}
+    &
+      \underbracket{
+        \forall \varepsilon \exists k_i :
+        \substack{
+          (\varepsilon > 0) \\[.3em]
+          \text{e} \\[.3em]
+          (k > k_i)
+        }
+        {\displaystyle\Bigg\}}
+        {\Rightarrow}
+        \left\{
+          \begin{array}{c}
+              \tikzeq{inf-a}{I - \varepsilon}
+                <
+              \tikzeq{inf-b}{I}
+                \le
+              \tikzeq{inf-c}{q_k}
+                \le
+              \tikzeq{inf-d}{q_{k_i}}
+                <
+              \tikzeq{inf-e}{I + \varepsilon}
+              \begin{tikzpicture}[eq-overlay]
+                \draw[brace, decoration={mirror}]
+                  ($(inf-e.base east) + (0, .7em)$)
+                  -- node[above=.2em] {(A)}
+                  ($(inf-d.base west) + (0, .7em)$);
+                \draw[brace, decoration={mirror}]
+                  ($(inf-c.base east) + (0, .7em)$)
+                  -- node[above=.2em] {(L)}
+                  ($(inf-b.base west) + (0, .7em)$);
+                \draw[brace80, decoration={mirror}]
+                  ($(inf-c.base west) + (0, -.2em)$)
+                  -- node[below=.3em, pos=.8] {(M)}
+                  ($(inf-d.base east) + (0, -.2em)$);
+                \draw[brace80]
+                  ($(inf-b.base east) + (0, -.1em)$)
+                  -- node[below=.3em, pos=.8] {$- \varepsilon < 0$}
+                  ($(inf-a.base west) + (0, -.1em)$);
+              \end{tikzpicture}
+            \\[.6em]
+              \big\Downarrow
+            \\
+              I - \varepsilon < q_k < I + \varepsilon
+            \\
+              \Updownarrow
+            \\
+              - \varepsilon < q_k - I < \varepsilon
+            \\
+              \Updownarrow
+            \\
+              |q_k - I| < \varepsilon
+          \end{array}
+        \right.
+      }_{\substack{
+          \displaystyle \Downarrow
+        \\[.3em]
+          \displaystyle \lim_{k\to\infty} q_k = I = \inf \{q_k\}
+      }}
+  \end{array}
+\]
+
+\textbf{Se a sequência converge,
+        a diferença entre elementos consecutivos converge para zero}.
+Dado que a sequência de termo geral $q_k$ converge,
+então para todo $\varepsilon$ existe um $K$
+para o qual $|q_k - L| < \varepsilon$ quando $k \ge K$,
+em que $L$ é o limite da sequência.
+Essa mesma sequência defasada por um único elemento
+irá convergir para o mesmo limite,
+bastando fazer um ajuste no índice $k$,
+isto é, usando o mesmo $\varepsilon$, sabemos que
+$|q_{k+1} - L| < \varepsilon$ quando $k \ge K - 1$.
+Quando $k \ge K$, ambas as desigualdades são válidas,
+e o limite de $q_{k+1} - q_k$ é zero,
+visto que o dobro de um valor arbitrário
+continua sendo um valor arbitrário:
+\[
+  \left.
+    \begin{array}{rcl}
+        |q_k - L| < \varepsilon
+      &\iff&
+        - \varepsilon < L - q_k < \varepsilon
+      \\
+        |q_{k+1} - L| < \varepsilon
+      &\iff&
+        - \varepsilon < q_{k+1} - L < \varepsilon
+    \end{array}
+  \right\}
+  \;\implies\;
+  - 2 \varepsilon < q_{k+1} - q_k < 2 \varepsilon
+  \;\iff\;
+  |q_{k+1} - q_k| < 2 \varepsilon
+\]
