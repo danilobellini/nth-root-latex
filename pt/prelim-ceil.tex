@@ -11,10 +11,10 @@ $\lceil \gamma \rceil$ é o menor inteiro maior ou igual a $\gamma$.
 
 Pelas definições das funções chão e teto,
 quando $\gamma$ é inteiro, temos:
-\[
+\begin{equation}\label{ceil-floor-z}
   \lfloor \gamma \rfloor = \gamma = \lceil \gamma \rceil
   \quad \forall \gamma \in \mathds{Z}
-\]
+\end{equation}
 E, para o cenário complementar, quando $\gamma \notin \mathds{Z}$,
 podemos explicitar que as inequações das definições não são estritas,
 isto é, $\lfloor \gamma \rfloor < \gamma < \lfloor \gamma \rfloor + 1$
@@ -29,11 +29,12 @@ $\lceil \gamma \rceil \le \lfloor \gamma \rfloor + 1$, respectivamente.
 Isso justifica a igualdade
 $\lceil \gamma \rceil = \lfloor \gamma \rfloor + 1$,
 que pode ser reescrita como:
-\[
+\begin{equation}\label{ceil-floor-notz}
   \lceil \gamma \rceil - \lfloor \gamma \rfloor = 1
   \quad \forall \gamma \in \mathds{R} \setminus \mathds{Z}
-\]
+\end{equation}
 Podemos aplicar esses últimos resultados
+\eqref{ceil-floor-z} e \eqref{ceil-floor-notz}
 em meio a provas de expressões
 que envolvam  simultaneamente as funções chão e teto,
 bastando utilizar o particionamento entre inteiros e não-inteiros
