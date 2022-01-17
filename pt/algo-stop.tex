@@ -56,12 +56,12 @@ podemos relacionar o sinal dos valores de $a_k$, $p_{k+1}$ e $d_{k+1}$:
           }_{d_{k+1}}
 \]
 Tal resultado pode ser resumido como:
-\[
+\begin{equation}
   \begin{array}{lcccr}
     p_{k+1}   < 0 &\iff& a_k   > \sqrt[n]{x} &\iff& a_k   > d_{k+1} \\
     p_{k+1} \ge 0 &\iff& a_k \le \sqrt[n]{x} &\iff& a_k \le d_{k+1}
   \end{array}
-\]
+\end{equation}
 Resta ainda entender melhor o cenário em que $a_k \le \sqrt[n]{x}$,
 bem como a forma com a qual esse resultado
 se relaciona com a corretude do algoritmo e o critério de parada.
@@ -95,7 +95,7 @@ Isso nos permite reescrever
 a relação entre o sinal dos valores de $a_k$, $p_{k+1}$ e $d_{k+1}$
 como uma variante mais restrita,
 admindo que $k > 0$ ou $a_0 \ge \lfloor \sqrt[n]{x} \rfloor$:
-\[
+\begin{equation}
   \begin{array}{lcccr}
       p_{k+1} < 0
     &\iff&
@@ -111,7 +111,7 @@ admindo que $k > 0$ ou $a_0 \ge \lfloor \sqrt[n]{x} \rfloor$:
                          a_0 \ge \lfloor \sqrt[n]{x} \rfloor}}{\iff}&
       a_k \le d_{k+1}
   \end{array}
-\]
+\end{equation}
 Dessa forma,
 podemos considerar que o critério de parada é $p_{k+1} \ge 0$.
 Em outras palavras,
