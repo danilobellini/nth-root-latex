@@ -30,9 +30,9 @@ Aplicando a função chão em cada lado da inequação\footnote{
   mas não é estritamente crescente.
 },
 temos:
-\[
+\begin{equation}\label{amgm-min-ak+1}
   a_{k+1} \ge \lfloor \sqrt[n]{x} \rfloor
-\]
+\end{equation}
 De forma que, basta termos $a_0 > 0$
 para garantirmos $a_k \ge \lfloor \sqrt[n]{x} \rfloor$ para $k > 0$.
 Mas seria interessante adotar uma condição inicial
@@ -46,10 +46,12 @@ Para isso, suponha que $a_s = 1$, com isso teríamos:
     \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
 \]
 Isso significa que:
-\[
+\begin{equation}\label{a0-not-below-result}
   \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
   \ge \lfloor \sqrt[n]{x} \rfloor
-\]
+\end{equation}
+O que prova a primeira das inequações
+fornecidas em \eqref{a0-between-result-and-x}.
 Ou seja, caso adotemos como condição inicial:
 \[
   a_0 = \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
