@@ -1,0 +1,68 @@
+\subsection*{Recorrência em $\mathds{R}$ para encontrar $\sqrt[n]{x}$}
+
+Dados números inteiros positivos $x$ e $n$,
+seja $f:\mathds{R}^+\to\mathds{R}$ a função polinomial:
+\begin{equation}
+  f(\alpha) = \alpha^n - x
+\end{equation}
+A qual podemos notar que satisfaz $f(\sqrt[n]{x}) = 0$.
+Nosso objetivo é encontrar uma sequência
+que convirja para esse zero dessa função,
+o que corresponde a encontrar $\alpha = \sqrt[n]{x}$.
+
+A derivada de $f$ com relação a $\alpha$ é:
+\begin{equation}
+  f'(\alpha) = n \alpha^{n - 1}
+\end{equation}
+Que é estritamente positiva para $\alpha$ positivo,
+o que significa que $f(\alpha)$ é monotônica crescente
+em todo o domínio $\alpha > 0$.
+Como $f(\alpha) \to -x < 0$ quando $\alpha \to 0$,
+$f(\alpha) \to \infty > 0$ quando $\alpha \to \infty$,
+e a função $f$ é contínua,
+podemos dizer que $\sqrt[n]{x}$
+é a única raiz real positiva dessa função\footnote{
+  Outra forma de identificar que essa raiz é única
+  consiste em lembrar que
+  \textsc{(i)} um polinômio de grau $n$
+  pode ser escrito como uma constante
+  multiplicada pelo produtório de $n$ termos $(z - z_m)$
+  para cada uma de suas $z_m$ raízes complexas,
+  e que \textsc{(ii)} as $n$ raízes de $z^n - 1$,
+  chamadas de \emph{raízes da unidade},
+  são $z_m = e^{i 2 \pi m / n}$,
+  para todos os valores $m$ de $0$ a $n - 1$,
+  em que $i$ é a unidade imaginária que satisfaz $i^2 = -1$,
+  e $e^{i\theta} = \cos\theta + i\operatorname{sen}\theta$.
+  Esse resultado pode ser interpretado como
+  uma identificação de arcos no círculo unitário do plano complexo
+  para dividir $m$ voltas completas em $n$ partes iguais.
+  Com isso, as $n$ raízes de $f(\alpha)$
+  são da forma $\sqrt[n]{x} \; e^{i 2 \pi m / n}$
+  para os diferentes valores inteiros de $m$,
+  e para $m = 0$ temos a única raiz real positiva.
+}.
+
+Aplicando os valores de $f(\alpha)$ e $f'(\alpha)$
+à equação da sequência do método de Newton-Raphson:
+\[
+  \alpha_{k+1} =
+    \alpha_k - \dfrac{\alpha_k^n - x}{n \alpha_k^{n-1}}
+  =
+    \dfrac{n \alpha_k^n - \alpha_k^n + x}{n \alpha_k^{n-1}}
+  =
+    \dfrac{(n-1) \alpha_k^n + x}{n \alpha_k^{n-1}}
+  =
+    \dfrac{(n-1) \alpha_k + \dfrac{x}{\alpha_k^{n-1}}}{n}
+\]
+Escrevendo de outra forma:
+\begin{equation}
+  \alpha_{k+1} = \dfrac{(n-1) \alpha_k + \delta_{k+1}}{n},
+  \quad\text{onde}\quad
+  \delta_{k+1} = \dfrac{x}{\alpha_k^{n-1}}
+\end{equation}
+O que é bastante similar à recorrência
+proposta anteriormente para o algoritmo.
+Esse novo equacionamento não possui as funções chão
+que tornavam todos os resultados intermediários naturais/inteiros,
+mas resta ainda avaliar se essa sequência converge.

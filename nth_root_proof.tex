@@ -16,42 +16,6 @@
 \input{pt/real.tex}
 
 
-\subsection*{Recorrência em $\mathds{R}$ para encontrar $\sqrt[n]{x}$}
-
-Seja $f(\alpha) = \alpha^n - x$
-em que $\alpha \in \mathds{R}$ e $x, n \in \mathds{N}^*$.
-Nota-se que $f(\sqrt[n]{x}) = 0$,
-e nosso objetivo é obter esse zero dessa função.
-A derivada de $f$ com relação a $\alpha$ é:
-\[f'(\alpha) = n \alpha^{n-1}\]
-A qual é estritamente positiva para $\alpha$ positivo,
-o que significa que $f(\alpha)$ é monotônica crescente
-no domínio $\alpha > 0$.
-Isso nos diz que a raiz $n$-ésima de $x$
-é o único zero real positivo dessa função.
-
-Aplicando os valores de $f(\alpha)$ e $f'(\alpha)$
-à equação da sequência do método de Newton-Raphson:
-\[
-  \begin{array}{rcl}
-  \alpha_{k+1}
-  &=& \alpha_k - \dfrac{\alpha_k^n - x}{n \alpha_k^{n-1}} \\[5mm]
-  &=& \dfrac{\alpha_k n \alpha_k^{n-1}
-    - (\alpha_k^n - x)}{n \alpha_k^{n-1}} \\[5mm]
-  &=& \dfrac{n \alpha_k^n - \alpha_k^n + x}{n \alpha_k^{n-1}} \\[5mm]
-  &=& \dfrac{(n-1) \alpha_k^n + x}{n \alpha_k^{n-1}} \\[5mm]
-  &=& \dfrac{(n-1) \alpha_k + \dfrac{x}{\alpha_k^{n-1}}}{n}
-  \end{array}
-\]
-Escrevendo de outra forma:
-\[\delta_{k+1} = \dfrac{x}{\alpha_k^{n-1}}\]
-\[\alpha_{k+1} = \dfrac{(n-1) \alpha_k + \delta_{k+1}}{n}\]
-O que é bastante similar ao algoritmo proposto inicialmente,
-a menos da ausência da função chão (ou piso)
-que tornava os resultados intermediários naturais/inteiros,
-e da ausência, até o momento, de um critério de parada.
-
-
 \section*{Convergência em $\mathds{R}$ sem truncamentos intermediários}
 
 Esse processo iterativo,
