@@ -77,3 +77,17 @@ que define a sequência do método de Newton-Raphson:
 \[\tag{NR}
   \alpha_{k+1} = \alpha_k - \dfrac{f(\alpha_k)}{f'(\alpha_k)}
 \]
+
+O que é suficiente para construir a sequência
+a partir de um palpite inicial $\alpha_0$.
+Quando essa sequência converge para algum $L \in \mathds{R}$,
+sabemos que $(\alpha_{k+1} - \alpha_k) \to 0$
+quando $k \to \infty$.
+Substituindo $\alpha_k$ e $\alpha_{k+1}$ por $L$ na equação,
+obtemos $f(\alpha_k) = 0$,
+o que significa que a sequência converge
+para uma raiz da função $f(\alpha)$.
+Vale ressaltar, entretanto,
+que uma condição necessária
+para que todos os termos da sequência existam
+é a garantia de que $f'(\alpha_k) \ne 0$ para todo $k$.
