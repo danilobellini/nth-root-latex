@@ -1,5 +1,28 @@
 \section*{Considerações preliminares}
 
+Para a apropriada compreensão
+das análises e provas realizadas no decorrer deste texto,
+são necessários conhecimentos sobre matemática elementar, conjuntos,
+potenciação, raízes, valor absoluto, somatórios, produtórios,
+relações de ordem e suas propriedades,
+provas (direta, contraposição, indução, contradição,
+        separação em casos),
+bem como um mínimo de cálculo diferencial em uma variável real.
+O restante dos requisitos matemáticos para a compreensão do texto
+são apresentados a seguir.
+
+A PEP 572 fornece duas \emph{dicas}
+para provar a corretude do algoritmo:
+\textsc{(i)} a desigualdade entre as médias aritmética e geométrica,
+e \textsc{(ii)} as propriedades do aninhamento de funções chão.
+Sobre o segundo item,
+não há nenhuma informação sobre quais propriedades são essas,
+exceto que elas não são triviais.
+Explicações acerca desses assuntos,
+incluindo as provas das propriedades necessárias
+ou de alguma forma vinculadas ao algoritmo em análise,
+encontram-se nesta seção do texto.
+
 Um resultado relevante acerca da comparação de números inteiros
 consiste em usar o ``passo'' unitário
 para converter entre desigualdades estritas e não-estritas.
@@ -10,6 +33,12 @@ Escrevendo $m$ como uma subtração de inteiros $m = \ell - k$, temos:
   k < \ell \iff k + 1 \le \ell,
   \quad \forall k \in \mathds{Z}, \; \forall \ell \in \mathds{Z}
 \end{equation}
+
+O restante desta seção está dividido por assunto.
+Analisaremos brevemente assuntos relacionados
+às funções chão e teto,
+à desigualdade entre as médias aritmética e geométrica,
+e à convergência de sequências de números reais.
 
 \input{pt/prelim-floor.tex}
 \input{pt/prelim-ceil.tex}
