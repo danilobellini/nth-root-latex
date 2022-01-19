@@ -1,0 +1,152 @@
+\subsection*{Convergência em $\mathds{R}$
+             sem truncamentos intermediários}
+
+Esse processo iterativo,
+obtido a partir do método de Newton-Raphson,
+converge?
+Para $n = 1$,
+aplicando esse valor em \eqref{real-recurrence}
+encontramos $\alpha_{k+1} = \delta_{k+1} = x$,
+isto é, a sequência converge em um único passo,
+e o palpite inicial $\alpha_0$ é completamente ignorado,
+de maneira que equacionamento não será realmente uma recorrência,
+mas uma mera atribuição para o resultado.
+E para $n \ge 2$?
+
+Admitindo que $n \ge 2$, e sabendo que $x > 0$,
+suponha que $\alpha_k > 0$.
+Nesse caso, podemos notar que $\alpha_{k+1} > 0$,
+visto que $n - 1 \ge 1$ e as somas, multiplicações e divisões
+que compõe a recorrência \eqref{real-recurrence}
+são todas realizadas apenas sobre números positivos,
+garantindo um resultado positivo.
+Por indução, sabemos que se o palpite inicial $\alpha_0$ for positivo,
+a sequência inteira será formada apenas por números positivos.
+Além disso, a equação \eqref{real-derivative} é estritamente positiva,
+de maneira que $f'(\alpha_k) \ne 0$ para todo $\alpha_k$,
+o que é suficiente para dizermos que todos os elementos da sequência
+podem ser construídos.
+
+Seja $\mathfrak{B}$ uma amostra
+contendo $n - 1$ elementos iguais a $\alpha_k$
+e um único elemento $\delta_{k+1}$.
+Segundo a desigualdade entre as médias aritmética e geométrica,
+os $n$ elementos dessa amostra,
+$\mathfrak{b}_1 = \mathfrak{b}_2 = ... = \mathfrak{b}_{n-1}
+                = \alpha_{k+1}$
+e $\mathfrak{b}_0 = \delta_k$,
+satisfazem
+$\sum \mathfrak{b}_j/n \ge \sqrt[n]{\prod \mathfrak{b}_j}$,
+ou seja:
+\begin{equation}
+  \dfrac{(n-1) \alpha_k + \delta_{k+1}}{n} \ge
+  \sqrt[n]{\alpha_k^{n-1} \delta_{k+1}}
+\end{equation}
+Usando as definições de $\delta_{k+1}$ e $\alpha_{k+1}$
+presentes em \eqref{real-recurrence},
+essa mesma desigualdade pode ser escrita como:
+\begin{equation}\label{real-amgm-min-alphak+1}
+  \alpha_{k+1} \ge \sqrt[n]{x}
+\end{equation}
+Esse resultado nos permite reduzir o domínio de análise,
+pois $0 < \alpha_0 < \sqrt[n]{x} \implies \alpha_1 \ge \sqrt[n]{x}$,
+e nesse caso poderíamos simplesmente tomar $\alpha_1$
+como o novo valor inicial, e teríamos essencialmente a mesma sequência,
+a menos da defasagem por $1$ nos índices.
+Dito de outra forma,
+se a sequência convergir para qualquer $\alpha_0 \ge \sqrt[n]{x}$,
+então ela irá convergir para qualquer $\alpha_0 > 0$,
+e podemos continuar a avaliação
+somente com o cenário em que $\alpha_0 \ge \sqrt[n]{x}$.
+
+Quando $\alpha_k = \sqrt[n]{x}$, não há o que analisar,
+pois a sequência definida em \eqref{real-recurrence} resulta em
+$\delta_{k+1} = \alpha_{k+1} = \sqrt[n]{x}$.
+Uma sequência constante é sempre trivialmente convergente
+para o valor constante de seus elementos.
+
+Por outro lado, quando $\alpha_k > \sqrt[n]{x}$,
+\[
+  \alpha_k > \sqrt[n]{x}
+  \quad\stackfirst{n \ge 2}{\iff}\quad
+  \alpha_k^n > {x}
+  \quad\stackfirst{\alpha_k > 0}{\iff}\quad
+  \alpha_k > \dfrac{x}{\alpha_k^{n - 1}}
+\]
+Em que a última expressão à direita é precisamente
+como $\delta_{k+1}$ foi definido em \eqref{real-recurrence}.
+Essa desigualdade $\alpha_k > \delta_{k+1}$
+e a definição de $\alpha_{k+1}$ dada em \eqref{real-recurrence}
+permitem escrever:
+\[
+  \alpha_k > \sqrt[n]{x}
+  \quad\implies\quad
+  \alpha_{k+1} = \dfrac{(n - 1) \alpha_k + \delta_{k+1}}{n}
+  < \dfrac{(n-1) \alpha_k + \alpha_k}{n} = \alpha_k
+\]
+Resumidamente:
+\begin{equation}\label{real-monotone}
+  \alpha_k > \sqrt[n]{x}
+  \quad\iff\quad
+  \alpha_k > \delta_{k+1}
+  \quad\implies\quad
+  \alpha_{k+1} < \alpha_k
+\end{equation}
+
+Juntando os resultados \eqref{real-amgm-min-alphak+1}
+e \eqref{real-monotone}, temos:
+\begin{equation}
+    \alpha_k > \sqrt[n]{x}
+  \quad\implies\quad
+      \tikzeq{real-conv-a}{\sqrt[n]{x}}
+    \le
+      \tikzeq{real-conv-b}{\alpha_{k+1}}
+    <
+      \tikzeq{real-conv-c}{\alpha_k}
+  \rule[-1.5em]{0pt}{3.5em}
+  \begin{tikzpicture}[eq-overlay]
+    \draw[brace]
+      ($(real-conv-a.base west) + (0, .7em)$)
+      -- node[above=.3em] {Limitada}
+      ($(real-conv-b.base east) + (0, .7em)$);
+    \draw[brace, decoration={mirror}]
+      ($(real-conv-b.base west) + (0, -.15em)$)
+      -- node[below=.2em] {Monotônica}
+      ($(real-conv-c.base east) + (0, -.15em)$);
+  \end{tikzpicture}
+\end{equation}
+Isto é, a cada passo/iteração estamos mais próximos do resultado.
+Como tal sequência é \emph{limitada} e \emph{monotônica},
+sabemos que ela é \emph{convergente}.
+Tal resultado completa todos os casos,
+permitindo-nos dizer que a sequência é convergente
+para qualquer valor inicial $\alpha_0 > 0$,
+desde que $n, x \in \mathds{N}^*$.
+
+O valor para o qual a sequência converge, o limite da sequência,
+como já foi discutido
+após a obtenção do equacionamento do método de Newton-Raphson,
+é uma raiz da função $f(\alpha)$.
+Ao calcular a derivada de $f(\alpha)$ em \eqref{real-derivative},
+já foi visto que a raiz da função é única em $\mathds{R}^+$,
+visto que a função é contínua e monotônica crescente no domínio,
+além de ``cruzar'' de um valor negativo para um valor positivo
+nesse domínio.
+Isso é suficiente
+para dizer que $\alpha_k \to \sqrt[n]{x}$ quando $k \to \infty$,
+mas podemos obter o mesmo resultado
+substituindo $\alpha_k$ e $\alpha_{k+1}$ por um valor $L$
+na recorrência \eqref{real-recurrence},
+visto que $(\alpha_{k+1} - \alpha_k) \to 0$ quando a sequência converge,
+e com isso obtemos:
+\begin{equation}
+    L = \dfrac{(n - 1) L + \dfrac{x}{L^{n-1}}}{n}
+  \stackfirst{n \ne 0}{\iff}
+    nL = nL - L + \dfrac{x}{L^{n-1}}
+  \iff
+    L = \dfrac{x}{L^{n-1}}
+  \stackfirst{L \ne 0}{\iff}
+    L^n = x
+  \stackfirst{L > 0}{\iff}
+    L = \sqrt[n]{x}
+\end{equation}

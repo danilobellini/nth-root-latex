@@ -11,7 +11,7 @@ que convirja para esse zero dessa função,
 o que corresponde a encontrar $\alpha = \sqrt[n]{x}$.
 
 A derivada de $f$ com relação a $\alpha$ é:
-\begin{equation}
+\begin{equation}\label{real-derivative}
   f'(\alpha) = n \alpha^{n - 1}
 \end{equation}
 Que é estritamente positiva para $\alpha$ positivo,
@@ -56,7 +56,7 @@ Aplicando os valores de $f(\alpha)$ e $f'(\alpha)$
     \dfrac{(n-1) \alpha_k + \dfrac{x}{\alpha_k^{n-1}}}{n}
 \]
 Escrevendo de outra forma:
-\begin{equation}
+\begin{equation}\label{real-recurrence}
   \alpha_{k+1} = \dfrac{(n-1) \alpha_k + \delta_{k+1}}{n},
   \quad\text{onde}\quad
   \delta_{k+1} = \dfrac{x}{\alpha_k^{n-1}}
