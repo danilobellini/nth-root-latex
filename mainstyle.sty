@@ -26,6 +26,14 @@
 \sys_get_shell:nnN { kpsewhich ~ --var-value ~ PDFLANG } {} \getpdflang
 \tl_trim_spaces:N \getpdflang
 
+% Get the file name based on the selected PDFLANG, with fallback
+\str_const:Nn \g_langfallback_str { pt }
+\NewDocumentCommand \inputLang { m } {
+  \file_if_exist:nTF { \getpdflang/#1.tex }
+    { \input { \getpdflang/#1.tex } }
+    { \input { \g_langfallback_str/#1.tex } }
+}
+
 % Require Babel mapping the PDFLANG to Babel's ldf
 \prop_const_from_keyval:Nn \g_pdflang_to_babel_prop {
   en = american ,
