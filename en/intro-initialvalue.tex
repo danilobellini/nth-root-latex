@@ -1,0 +1,84 @@
+\subsection*{Choosing the initial value}
+
+The initial value $a_0$ could have been $x$ itself,
+since $x \ge \lfloor \sqrt[n]{x} \rfloor$
+for all positive integer $x$,
+that is, it's a value that satisfies
+the constraint defined by the algorithm.
+Yet, the chosen value is typically less than $x$:
+\[\tag{Initial value}
+  a_0 = \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+      = \left\lceil \dfrac{x\vphantom{l}}{n} \right\rceil
+\]
+For large values of $x$, this initial value will be close\footnote{
+  As $\lceil x/n \rceil - 1 < x/n \le \lceil x/n \rceil$
+  from the definition of the ceiling function,
+  we have $0 \le \lceil x/n \rceil - x/n < 1$.
+  Assuming $n$ is constant, the difference $\lceil x/n \rceil - x/n$
+  becomes less significant as $x$ increases.
+  \[
+    \lim_{x\to\infty} \dfrac{\lceil x/n \rceil}{x/n}
+    =
+    \lim_{x\to\infty} \cancelto{0\;(\text{Limited}/\infty)}{
+                        \dfrac{\lceil x/n \rceil - x/n}{x/n}
+                      } +
+                      \dfrac{x/n}{x/n}
+    = 1
+  \]
+}
+to $x/n$.
+The justification for the equivalence
+of the two expressions for the initial value
+consists of deducing the equation \eqref{ceil-x-over-n-as-floor},
+which is provided after identifying the properties
+of the involved functions.
+For everything else in this text,
+the initial value is described only by means of the floor function.
+
+Applying the floor function
+never result in a value greater than the original one
+upon which it's applied\footnote{
+  The definition of the floor function is given later in the text,
+  for now it suffices to know that $\lfloor \gamma \rfloor \le \gamma$.
+},
+allowing us to write:
+\[
+  \overbrace{\left\lfloor \dfrac{x - 1}{n} \right\rfloor}^{a_0 - 1}
+  \le \dfrac{x - 1}{n}
+  \quad\iff\quad
+  a_0 \le \dfrac{x - 1}{n} + 1
+\]
+
+When is this choice of $a_0$
+farther from the solution
+than the adoption of $x$ itself as the initial value?
+That is, which are the values of $x$ and $n$
+that cause $a_0 > x$?
+In order to answer these questions,
+let's take $a_0 > x$ as a hypothesis,
+so that $x < a_0 \le \dfrac{x - 1}{n} + 1$.
+Thus:
+\[
+  x < \dfrac{x - 1}{n} + 1
+  \quad\iff\quad
+  x - 1 < \dfrac{x - 1}{n}
+  \quad\stackfirst{n > 0}{\iff}\quad
+  n(x - 1) < x - 1
+  \quad\iff\quad
+  (n - 1)(x - 1) < 0
+\]
+As $x$ and $n$ are positive integers,
+such inequality is a contradiction,
+allowing for us to say that $a_0 \le x$.
+More generally,
+we can group the inequalities of integer numbers:
+\begin{equation}\label{a0-between-result-and-x}
+  \lfloor \sqrt[n]{x} \rfloor
+  \le
+  \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+  \le
+  x
+\end{equation}
+The first part of the inequality, with the $n$-th root,
+is demonstrated later, in \eqref{a0-not-below-result},
+but the second part is already justified when $n \ge 1$ and $x \ge 1$.
