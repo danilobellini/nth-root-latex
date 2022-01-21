@@ -1,0 +1,28 @@
+\subsection*{Algorithm description}
+
+Let $x$ and $n$ be positive integer values,
+and let $a_0 \ge \lfloor \sqrt[n]{x} \rfloor$ be
+a starting guess\footnote{
+  In PEP 572,
+  the constraint for the starting guess is $a_0 \ge \sqrt[n]{x}$.
+  The difference is subtle, but it's possible to notice,
+  based on \eqref{ak-between-floor-and-root},
+  that the only integer number
+  that satisfy just one of these inequalities
+  is itself the the desired result for the algorithm,
+  a circumstance where the iterative process is expected to end,
+  and the starting guess value $a_0$ itself is expected to be returned.
+},
+also integer and positive.
+In order to find the value of $\lfloor \sqrt[n]{x} \rfloor$,
+we're going to iteratively calculate the following sequence
+while $a_k > d_{k+1}$:
+\[
+  d_{k+1} = \left\lfloor \dfrac{x}{a_k^{n-1}} \right\rfloor
+\]
+\[
+  a_{k+1} = \left\lfloor \dfrac{(n-1) a_k + d_{k+1}}{n} \right\rfloor
+\]
+The result is the last $a_k$ value found in this process,
+that is, the result is the value of $a_r$,
+where $r$ is the smallest index for which $a_k \le d_{k+1}$ is valid.
