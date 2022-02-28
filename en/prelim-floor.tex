@@ -1,0 +1,129 @@
+\subsection*{Floor function}
+
+Let $\gamma \in \mathds{R}$ and $k \in \mathds{Z}$.
+One path for defining the floor function
+is to set it as the $\lfloor \cdot \rfloor : \mathds{R} \to \mathds{Z}$
+function satisfying:
+\begin{equation}\tag{Floor}
+  \lfloor \gamma \rfloor \le \gamma < \lfloor \gamma \rfloor + 1
+\end{equation}
+That is,
+$\lfloor \gamma \rfloor$ is the greatest integer
+less than or equal to $\gamma$.
+
+By adding $k$ to the inequalities in the definition,
+the result also satisfies the floor function definition:
+\[
+  \overbrace{
+    \underbrace{\lfloor \gamma \rfloor + k}_{\in \mathds{Z}}
+  }^{\lfloor \mu \rfloor}
+  \le \overbrace{\gamma + k}^{\mu} <
+  \overbrace{
+    \underbrace{\lfloor \gamma \rfloor + k}_{\in \mathds{Z}} + 1
+  }^{\lfloor \mu \rfloor + 1}
+\]
+In other words:
+\begin{equation}\label{floor-int}
+  \lfloor \gamma \rfloor + k = \lfloor \gamma + k \rfloor,
+  \quad \forall \gamma \in \mathds{R}, \; \forall k \in \mathds{Z}
+\end{equation}
+
+It's always possible to say that
+$\gamma < k \implies \lfloor \gamma \rfloor < k$,
+since, from the definition given for the floor function,
+$\lfloor \gamma \rfloor \le \gamma$.
+On the other hand,
+result \eqref{int+1} tells us that
+when $\lfloor \gamma \rfloor < k$ for a given $k \in \mathds{Z}$,
+we get $\lfloor \gamma \rfloor + 1 \le k$,
+and we can join this result
+with the second inequality in the definition of the floor function,
+$\gamma < \lfloor \gamma \rfloor + 1$,
+which allows for us to say that $\gamma < k$.
+That is, $\lfloor \gamma \rfloor < k \implies \gamma < k$.
+In short:
+\begin{equation}\label{floor-switch-lt}
+  \gamma < k \iff \lfloor \gamma \rfloor < k,
+  \quad \forall \gamma \in \mathds{R}, \; \forall k \in \mathds{Z}
+\end{equation}
+
+A similar property can be found
+for the complementary inequation.
+As $\lfloor \gamma \rfloor \le \gamma$,
+we have $k \le \lfloor \gamma \rfloor \implies k \le \gamma$.
+On the other hand,
+as $\gamma < \lfloor \gamma \rfloor + 1$,
+if we assume $k \le \gamma$,
+we get $k < \lfloor \gamma \rfloor + 1$,
+and since it's an inequality of integers,
+result \eqref{int+1} allows for us to say that
+$k < \lfloor \gamma \rfloor + 1 \iff
+ k + 1 \le \lfloor \gamma \rfloor + 1 \iff
+ k \le \lfloor \gamma \rfloor$.
+Thus:
+\begin{equation}\label{floor-switch-ge}
+  \gamma \ge k \iff \lfloor \gamma \rfloor \ge k,
+  \quad \forall \gamma \in \mathds{R}, \; \forall k \in \mathds{Z}
+\end{equation}
+
+The last provided justification
+also applies when we assume $k < \gamma$,
+so that:
+\begin{equation}\label{floor-lt2ge-int}
+  \gamma > k
+  \implies
+  \lfloor \gamma \rfloor \ge k
+  \quad \forall \gamma \in \mathds{R}, \; \forall k \in \mathds{Z}
+\end{equation}
+
+From applying the definition of the floor function
+on $\lfloor \gamma \rfloor / n$, $n \in \mathds{N}^*$,
+and multiplying the result by $n$, follows:
+\[
+      \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+    \le
+      \dfrac{\left\lfloor \gamma \right\rfloor}{n}
+    <
+      \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+      + 1
+  \quad\iff\quad
+      n \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+    \le
+      \left\lfloor \gamma \right\rfloor
+    <
+      n \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+      + n
+  \quad\stackfirst{
+    m =
+    \left\lfloor
+      {}^{\scriptstyle\lfloor \gamma \rfloor} / {}_{\scriptstyle n}
+    \right\rfloor
+  }{\iff}\quad
+    n m \le \left\lfloor \gamma \right\rfloor < n m + n
+\]
+
+Result \eqref{floor-switch-lt}
+applied to the inequality $\left\lfloor \gamma \right\rfloor < n m + n$
+gives $\gamma < n m + n$,
+and result \eqref{floor-switch-ge} tells us that
+the inequality $n m \le \left\lfloor \gamma \right\rfloor$
+can be written as $n m \le \gamma$.
+Resuming:
+\[
+  n m \le \left\lfloor \gamma \right\rfloor < n m + n
+  \quad\stackfirst{\eqref{floor-switch-lt}\text{ and }
+                   \eqref{floor-switch-ge}}{\iff}\quad
+  n m \le \gamma < n m + n
+  \quad\stackfirst{n > 0}{\iff}\quad
+  m \le \dfrac{\gamma}{n} < m + 1
+\]
+Which again consists in the definition of the floor function,
+since $m$ is an integer.
+That is, $m = \lfloor \gamma / n \rfloor$.
+Finally:
+\begin{equation}\label{floor-nested-ratio}
+  \left\lfloor \dfrac{\lfloor \gamma \rfloor}{n} \right\rfloor
+  =
+  \left\lfloor \dfrac{\gamma\vphantom{l}}{n} \right\rfloor
+  \quad \forall \gamma \in \mathds{R}, \; \forall n \in \mathds{N}^*
+\end{equation}
