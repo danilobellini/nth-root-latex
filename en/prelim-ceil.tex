@@ -1,0 +1,122 @@
+\subsection*{Ceiling function and its relation to the floor function}
+
+The ceiling function can be defined
+as the $\lceil \cdot \rceil : \mathds{R} \to \mathds{Z}$ function
+that satisfies:
+\begin{equation}\tag{Ceiling}
+  \lceil \gamma \rceil - 1 < \gamma \le \lceil \gamma \rceil
+\end{equation}
+That is,
+$\lceil \gamma \rceil$ is the least integer
+greater than or equal to $\gamma$.
+
+Based on the definitions of the floor and ceiling functions,
+when $\gamma$ is integer, we have:
+\begin{equation}\label{ceil-floor-z}
+  \lfloor \gamma \rfloor = \gamma = \lceil \gamma \rceil
+  \quad \forall \gamma \in \mathds{Z}
+\end{equation}
+And, in the complementary scenario, when $\gamma \notin \mathds{Z}$,
+we can state that the inequalities of the definitions aren't strict;
+more precisely,
+$\lfloor \gamma \rfloor < \gamma < \lfloor \gamma \rfloor + 1$
+and $\lceil \gamma \rceil - 1 < \gamma < \lceil \gamma \rceil$.
+Applying the transitive property, we can obtain two new inequations:
+$\lfloor \gamma \rfloor < \lceil \gamma \rceil$
+and $\lceil \gamma \rceil - 1 < \lfloor \gamma \rfloor + 1$.
+Result \eqref{int+1}
+applied to each of these two inequations yields
+$\lfloor \gamma \rfloor + 1 \le \lceil \gamma \rceil$ and
+$\lceil \gamma \rceil \le \lfloor \gamma \rfloor + 1$, respectively.
+This justifies the equation
+$\lceil \gamma \rceil = \lfloor \gamma \rfloor + 1$,
+which can be rewritten as:
+\begin{equation}\label{ceil-floor-notz}
+  \lceil \gamma \rceil - \lfloor \gamma \rfloor = 1
+  \quad \forall \gamma \in \mathds{R} \setminus \mathds{Z}
+\end{equation}
+We can apply
+these last \eqref{ceil-floor-z} and \eqref{ceil-floor-notz} results
+amid proofs of expressions
+that simultaneously involve both floor and ceiling functions,
+partitioning between integers and non-integers
+for proving each case separately.
+This recourse will be applied in what follows.
+
+Let $x \in \mathds{Z}$ and $n \in \mathds{N}^*$.
+When $x/n \in \mathds{Z}$, we can write:
+\[
+    \left\lfloor \dfrac{x - 1}{n} \right\rfloor =
+    \left\lfloor \dfrac{x}{n} - \dfrac{1}{n} \right\rfloor
+      \stackfirst{\text{\eqref{floor-int}}}{=}
+    \dfrac{x}{n} + \left\lfloor - \dfrac{1}{n} \right\rfloor =
+    \dfrac{x}{n} - 1
+  \quad\implies\quad
+    \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1 =
+    \dfrac{x}{n}
+      \stackfirst{(\mathds{Z})}{=}
+    \left\lceil \dfrac{x\vphantom{l}}{n} \right\rceil
+\]
+By applying the property described in equation \eqref{floor-int}
+and from the fact that $\lfloor -1/n \rfloor = -1$,
+since $-1 \le -1/n < 0$.
+On the other hand, when $x/n \notin \mathds{Z}$,
+starting from the definition of the floor function,
+already discarding the equality case as it's only for integers,
+and based on the results \eqref{int+1} and \eqref{floor-switch-ge},
+we can write:
+\begin{align*}
+    \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor
+    < \dfrac{x\vphantom{l}}{n}
+  &\quad\stackrel{\rule[-.3em]{0pt}{0pt}n > 0}{\iff}\quad
+    n \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor < x
+  \\&\quad\iff\quad
+    0 < x - n \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor
+  \\&\quad\stackrel{\rule[-.3em]{0pt}{0pt}\eqref{int+1}}{\iff}\quad
+    1 \le x - n \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor
+  \\&\quad\iff\quad
+    n \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor \le x - 1
+  \\&\quad\stackrel{\rule[-.3em]{0pt}{0pt}n > 0}{\iff}\quad
+    \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor
+    \le \dfrac{x - 1}{n}
+  \\&\quad\stackrel{\rule[-.3em]{0pt}{0pt}\eqref{floor-switch-ge}}{\iff}\quad
+    \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor
+    \le \left\lfloor \dfrac{x - 1}{n} \right\rfloor
+\end{align*}
+We can also leverage the result \eqref{floor-lt2ge-int}
+and the definition of the floor function
+$\left\lfloor \dfrac{x - 1}{n} \right\rfloor \le \dfrac{x - 1}{n}$ in:
+\[
+    -1 < 0
+  \quad\iff\quad
+    x - 1 < x
+  \quad\stackfirst{n > 0}{\iff}\quad
+    \dfrac{x - 1}{n} < \dfrac{x}{n}
+  \quad\stackfirst{\text{(Floor)}}{\implies}\quad
+    \left\lfloor \dfrac{x - 1}{n} \right\rfloor < \dfrac{x}{n}
+  \quad\stackfirst{\eqref{floor-lt2ge-int}}{\iff}\quad
+    \left\lfloor \dfrac{x - 1}{n} \right\rfloor
+    \le \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor
+\]
+That is,
+$\left\lfloor \dfrac{x - 1}{n} \right\rfloor =
+ \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor$
+when $x/n \notin \mathds{Z}$.
+But in this case we also know that
+$\left\lceil \dfrac{x\vphantom{l}}{n} \right\rceil -
+ \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor = 1$.
+Hence:
+\[
+  \left\lceil \dfrac{x\vphantom{l}}{n} \right\rceil
+  = 1 + \left\lfloor \dfrac{x\vphantom{l}}{n} \right\rfloor
+  = 1 + \left\lfloor \dfrac{x - 1}{n} \right\rfloor
+\]
+Which is the same result found for $x/n \in \mathds{Z}$.
+Therefore, we conclude that:
+\begin{equation}\label{ceil-x-over-n-as-floor}
+  \left\lceil \dfrac{x\vphantom{l}}{n} \right\rceil
+  = \left\lfloor \dfrac{x - 1}{n} \right\rfloor + 1
+  \quad \forall x \in \mathds{Z}, \; \forall n \in \mathds{N}^*
+\end{equation}
+Such value is precisely the initial value equation
+chosen for the algorithm.
